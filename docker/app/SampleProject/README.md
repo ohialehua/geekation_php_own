@@ -1,64 +1,42 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Foodhub
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## なぜこのアプリを作ろうと思ったのか(背景)
 
-## About Laravel
+インスタグラムや Twitter などの SNS でおいしそうな食べ物を見かける機会がここ何年かで急激に増えたように感じます。 そしてそれらの投稿を見て、「食べてみたい」や「ギフトにちょうどいいかも」と購買意欲が高くなる人は少なくないと思います。 私もその一人なのですが、飲食物の場合一度他のサイトを経由して購入するというものがほとんどで、面倒に感じたり、購入を後回しにして結局購入せずに終わるということが多々あります。 また、飲食店で働いていたころに、コロナ禍で新しくお取り寄せ販売を始めたはいいが、サイト利用者同士の繋がりが少なく、新規利用者が増えずになかなか収益につながらないという飲食店の話をいくつも聞きました。 その為、複数のサイトに頼らずに、SNS で投稿を見てそのまま購入までできるアプリがあればこれらの事態が解決でき、飲食業界はもちろん、美味しい食べ物の情報を気軽に知りたい方にも使い勝手の良い愛されるアプリになると思い、このテーマにしました。
+　ちなみに、このアプリは私が二次面接の際に発表した[Foodhub](http://35.77.164.252/)が基になるアプリです。今まで学んだ知識を網羅できるため技術面も申し分なく、Ruby on Rails では難しかった動的なサイトへの挑戦が PHP では叶うためこのテーマにいたしました。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## どうやってマネタイズするのか
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+このアプリは加盟店とエンドユーザーが多対多の関係で情報発信する SNS 兼 EC サイトです。EC サイトの手数料や、広告掲載料などが主な収益になります。加盟店、エンドユーザー問わずたくさんの方に気軽に利用してもらいたいため、今のところ年会費などのサブスクとしての収益は考えておりません。
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 誰に必要とされるのか
 
-## Learning Laravel
+-   美味しいものやギフト用の商品を気軽に買いたい人
+-   自分の店のことをもっと知ってもらいたい飲食店
+-   ただおいしそうなものを見たい人
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+何かお取り寄せやギフトを贈りたい、新商品や限定販売したいものがあるから知ってもらいたい、隙間時間においしそうなものを見たい、飲食の繋がりで他の人と交流を持ちたい、そんな想いのある方が主なターゲットユーザーです。
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 機能/非機能一覧
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   ユーザー認証機能(admin,store,enduser)
+-   CRUD 機能
+-   検索機能
+-   いいね、お気に入り機能
+-   コメント機能
+-   フォロー・フォロワー機能
+-   トラッキング機能
+-   メール機能
+-   おすすめ、ランキング機能
+-   スライダー機能
+-   画像アップロード機能
+-   ソート機能
+-   タイムライン機能
+-   ページ機能
+-   注文機能
+-   カード決済機能
+-   通知機能
+-   管理者機能
+-   論理削除による退会機能
+-   非同期通信
+-   アクセス権限

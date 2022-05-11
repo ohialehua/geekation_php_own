@@ -15,7 +15,7 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('enduser_id')->nullable(false);
+            $table->integer('user_id')->nullable(false);
             $table->string('post_address')->nullable(false);
             $table->string('address')->nullable(false);
             $table->string('name')->nullable(false);

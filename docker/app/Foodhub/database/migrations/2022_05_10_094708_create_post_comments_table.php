@@ -15,9 +15,9 @@ class CreatePostCommentsTable extends Migration
     {
         Schema::create('post_comments', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('enduser_id');
+            $table->integer('user_id');
             $table->integer('store_id');
-            $table->integer('enduser_post_id');
+            $table->integer('user_post_id');
             $table->integer('store_post_id');
             $table->text('comment')->nullable(false);
             $table->timestamps();

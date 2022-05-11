@@ -15,7 +15,7 @@ class CreateMarkersTable extends Migration
     {
         Schema::create('markers', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('enduser_id')->nullable(false);
+            $table->integer('user_id')->nullable(false);
             $table->integer('store_id')->nullable(false);
             $table->timestamps();
         });

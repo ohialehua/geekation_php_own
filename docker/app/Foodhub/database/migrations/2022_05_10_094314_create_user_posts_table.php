@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEnduserPostsTable extends Migration
+class CreateUserPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEnduserPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('enduser_posts', function (Blueprint $table) {
+        Schema::create('user_posts', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('enduser_id')->nullable(false);
+            $table->integer('user_id')->nullable(false);
             $table->string('post_image_id')->nullable(false);
             $table->text('body')->nullable(false);
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateEnduserPostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enduser_posts');
+        Schema::dropIfExists('user_posts');
     }
 }

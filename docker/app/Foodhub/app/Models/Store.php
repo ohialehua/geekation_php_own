@@ -19,7 +19,11 @@ class Store extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'name_kana',
         'email',
+        'post_address',
+        'address',
+        'phone_number',
         'password',
     ];
 

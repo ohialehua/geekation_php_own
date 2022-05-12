@@ -11,9 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js').vue()
+    .autoload( {"jquery": [ '$', 'window.jQuery' ],})
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();
-
-//vueのバージョンが2の場合は下記のように明示的にする
-mix.js('resources/js/app.js', 'public/js').vue({ version: 3 });

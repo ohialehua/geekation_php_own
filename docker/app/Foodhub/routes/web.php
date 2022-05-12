@@ -59,7 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 */
 Route::group(['prefix' => 'store'], function() {
     Route::get('register',     'App\Http\Controllers\Store\RegisterController@showRegisterForm')->name('store.register');
-    Route::post('register',    'App\Http\Controllers\Store\RegisterController@create');
+    Route::post('register',    'App\Http\Controllers\Store\RegisterController@register');
     Route::get('login',     'App\Http\Controllers\Store\LoginController@showLoginForm')->name('store.login');
     Route::post('login',    'App\Http\Controllers\Store\LoginController@login');
 });

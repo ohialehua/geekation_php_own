@@ -38,16 +38,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:store');
+        $this->middleware('guest:store');
     }
     public function showRegisterForm()
     {
         return view('store.register');  //変更
-    }
-
-    protected function guard()
-    {
-        return Auth::guard('store');  //変更
     }
 
     public function logout(Request $request)
@@ -71,7 +66,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:12'],
             'name_kana' => ['required', 'string', 'max:24'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:stores'],
-            'post_address' => ['required', 'string', 'length:7'],
+            'post_address' => ['required', 'string', 'max:12'],
             'address' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -88,8 +83,22 @@ class RegisterController extends Controller
     {
         return Store::create([
             'name' => $data['name'],
+            'name_kana' => $data['name_kana'],
             'email' => $data['email'],
+            'post_address' => $data['post_address'],
+            'address' => $data['address'],
+            'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return \Auth::guard('store'); //管理者認証のguardを指定
     }
 }

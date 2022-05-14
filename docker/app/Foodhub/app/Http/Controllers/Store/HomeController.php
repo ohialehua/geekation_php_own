@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Store;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 
 class HomeController extends Controller
 {
@@ -22,8 +23,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Store $store)
     {
-        return view('store.home');
+        $store = Store::where('id', 1)->first();
+        return view('store.home', ['store'=>$store]);
     }
 }

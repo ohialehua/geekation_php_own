@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 
 class LoginController extends Controller
 {
@@ -47,7 +49,7 @@ class LoginController extends Controller
         return Auth::guard('admin');  //変更
     }
 
-    public function logout(Request $request)
+    public function logout(\Illuminate\Http\Request $request)
     {
         Auth::guard('admin')->logout();  //変更
         $request->session()->flush();

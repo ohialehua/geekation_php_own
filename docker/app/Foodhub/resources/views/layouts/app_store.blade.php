@@ -58,6 +58,18 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('store.home') }}">
+                                        {{ __('Mypage') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('store.home') }}">
+                                        {{ __('Customers') }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('store.home') }}">
+                                        {{ __('Orders') }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('store.logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -75,9 +87,14 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="mb-auto py-4">
             @yield('content')
         </main>
     </div>
+    <footer class="py-3">
+      <div class="container text-center text-black">
+        <p>© Copyright 2022 Foodhub All rights reserved.</p>
+      </div>
+    </footer>
 </body>
 </html>

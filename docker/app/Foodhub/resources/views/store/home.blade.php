@@ -23,13 +23,17 @@
     <div class="col-lg-5">
       <h2>{{$store->name}}詳細</h2>
       <div class="col-3 d-inline-block">
+      @if ($store->profile_image === null)
         <img src="/storage/no_image.png" width="100" height="100" >
+      @else
+        <img src="{{ asset('storage/store_profiles/'.$store->profile_image) }}" width="100" height="100">
+      @endif
       </div>
       <div class="col-4 d-inline-block">
         <ul>
-          <a href="store/edit" class="btn btn-sm btn-secondary mb-2">編集</a>
-          <a href="store/unsubscribe" class="btn btn-sm btn-danger mb-2">退会</a>
-          <a href="store/orders" class="btn btn-sm btn-primary">注文履歴一覧</a>
+          <a href="edit" class="btn btn-sm btn-secondary mb-2">編集</a>
+          <a href="unsubscribe" class="btn btn-sm btn-danger mb-2">退会</a>
+          <a href="orders" class="btn btn-sm btn-primary">注文履歴一覧</a>
         </ul>
       </div>
       <div class="col text-right"><a>フォロワー数：○○</a></div>

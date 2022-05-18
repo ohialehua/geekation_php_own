@@ -72,4 +72,6 @@ Route::group(['prefix' => 'store'], function() {
 Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::post('logout',   'App\Http\Controllers\Store\LoginController@logout')->name('store.logout');
     Route::get('home',      'App\Http\Controllers\Store\HomeController@show')->name('store.home');
+    Route::get('edit',      'App\Http\Controllers\Store\StoreController@edit')->name('store.edit');
+    Route::post('edit',      'App\Http\Controllers\Store\StoreController@update')->name('store.update');
 });

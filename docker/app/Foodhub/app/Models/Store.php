@@ -25,6 +25,10 @@ class Store extends Authenticatable
         'address',
         'phone_number',
         'password',
+        'introduction',
+        'profile_image',
+        'image_path',
+        'is_deleted',
     ];
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
+use Image;
 
 class HomeController extends Controller
 {
@@ -23,9 +24,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Store $store)
+    public function show()
     {
-        $store = Store::where('id', 1)->first();
+        $store = \Auth::user();
         return view('store.home', ['store'=>$store]);
     }
 }

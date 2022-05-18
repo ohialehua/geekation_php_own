@@ -71,5 +71,5 @@ Route::group(['prefix' => 'store'], function() {
 */
 Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::post('logout',   'App\Http\Controllers\Store\LoginController@logout')->name('store.logout');
-    Route::get('home',      'App\Http\Controllers\Store\HomeController@index')->name('store.home');
+    Route::get('home',      'App\Http\Controllers\Store\HomeController@show')->name('store.home');
 });

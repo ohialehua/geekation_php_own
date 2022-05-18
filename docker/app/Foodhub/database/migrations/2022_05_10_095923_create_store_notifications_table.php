@@ -15,10 +15,9 @@ class CreateStoreNotificationsTable extends Migration
     {
         Schema::create('store_notifications', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('enduser_id')->nullable(false);
+            $table->integer('user_id')->nullable(false);
             $table->integer('store_id')->nullable(false);
             $table->integer('store_order_id');
-            $table->integer('post_id');
             $table->integer('post_comment_id');
             $table->string('action')->nullable(false);
             $table->boolean('checked')->default(false);

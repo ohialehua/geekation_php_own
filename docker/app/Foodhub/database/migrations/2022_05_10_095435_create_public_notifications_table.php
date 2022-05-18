@@ -17,10 +17,9 @@ class CreatePublicNotificationsTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('sender_id');
             $table->integer('receiver_id');
-            $table->integer('enduser_id');
+            $table->integer('user_id');
             $table->integer('store_id');
             $table->integer('store_order_id');
-            $table->integer('post_id');
             $table->integer('post_comment_id');
             $table->string('action')->nullable(false);
             $table->boolean('checked')->default(false);

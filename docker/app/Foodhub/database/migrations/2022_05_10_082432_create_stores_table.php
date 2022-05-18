@@ -20,7 +20,8 @@ class CreateStoresTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('name_kana')->nullable(false);
             $table->text('introduction')->nullable();
-            $table->string('profile_image_id')->nullable();
+            $table->string('profile_image')->nullable();
+            $table->string("image_path")->nullable();
             $table->string('post_address')->nullable(false);
             $table->string('address')->nullable(false);
             $table->string('phone_number')->nullable(false);

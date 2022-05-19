@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function show(Store $store)
     {
         $store = \Auth::user();
-        $items = Store::find(1)->items;
+        $items = Store::find($store->id)->items;
                 // ->orderBy('created_at', 'desc');
         return view('store.home', ['store'=>$store, 'items'=>$items]);
     }

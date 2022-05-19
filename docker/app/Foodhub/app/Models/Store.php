@@ -17,6 +17,12 @@ class Store extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function posts() { //1対多の「多」側なので複数形
+        return $this->hasMany('App\Models\Post');
+    }
+    public function items() {
+        return $this->hasMany('App\Models\Item');
+    }
     protected $fillable = [
         'name',
         'name_kana',

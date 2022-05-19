@@ -83,7 +83,7 @@
         <h2>商品一覧</h2>
       </div>
       <div class="col-3 d-inline-block">
-        <a href="store/items/new" class="btn btn-sm btn-primary">商品を新規登録</a>
+        <a href="item/new" class="btn btn-sm btn-primary">商品を新規登録</a>
       </div>
       <table class="table table-light border text-center">
         <thead>

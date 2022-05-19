@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Store;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
-use App\Models\User;
+use App\Models\Store;
 
 class ItemController extends Controller
 {
@@ -36,7 +36,7 @@ class ItemController extends Controller
 
         try {
                 $newItem = new Item($request->all());
-                  $newItem->store_id = \Auth::user()->id;
+                  $newItem->store_id = $request->user()->id;
                   $newItem->save();
 
                 $image = $request->file('image');

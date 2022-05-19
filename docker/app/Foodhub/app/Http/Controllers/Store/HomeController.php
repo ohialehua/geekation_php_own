@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
+use App\Models\Item;
 
 class HomeController extends Controller
 {
@@ -23,9 +24,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function show()
+    public function show(Store $store)
     {
         $store = \Auth::user();
-        return view('store.home', ['store'=>$store]);
+        $items = Store::find(1)->items;
+                // ->orderBy('created_at', 'desc');
+        return view('store.home', ['store'=>$store, 'items'=>$items]);
     }
 }

@@ -21,7 +21,7 @@ class Store extends Authenticatable
         return $this->hasMany('App\Models\Post');
     }
     public function items() {
-        return $this->hasMany('App\Models\Item');
+        return $this->hasMany(Item::class);
     }
     protected $fillable = [
         'name',

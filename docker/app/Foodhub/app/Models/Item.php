@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
 
     public function store() { //1対多の「１」側なので単数系
-        return $this->belongsTo('App\Models\Store');
+        return $this->belongsTo(Store::class);
     }
 
     protected $fillable = [

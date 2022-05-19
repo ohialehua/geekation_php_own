@@ -91,6 +91,15 @@
           <td>税抜き価格</td>
           <td>ステータス</td>
         </thead>
+        <tbody>
+          @foreach ($items as $item)
+            <tr>
+              <td>{{$item->name}}</td>
+              <td>{{$item->price_before_tax}}</td>
+              <td>{{$item->is_active}}</td>
+            </tr>
+          @endforeach
+        </tbody>
       </table>
     </div>
 

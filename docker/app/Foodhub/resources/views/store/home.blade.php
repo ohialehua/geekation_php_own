@@ -94,9 +94,13 @@
         <tbody>
           @foreach ($items as $item)
             <tr>
-              <td>{{$item->name}}</td>
-              <td>{{$item->price_before_tax}}</td>
-              <td>{{$item->is_active}}</td>
+              <td><a href="/item/edit" class="text-dark">{{$item->name}}</a></td>
+              <td>{{number_format($item->price_before_tax)}}円</td>
+              @if ($item->is_active === 0)
+                <td><span class="badge bg-success">販売中</span></td>
+              @elseif ($item->is_active === 1)
+                <td><span class="badge bg-danger">販売停止中</span></td>
+              @endif
             </tr>
           @endforeach
         </tbody>

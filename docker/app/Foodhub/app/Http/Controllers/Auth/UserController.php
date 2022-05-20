@@ -24,6 +24,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function index() {
+        $users = User::all();
+        return view('user.index', ['users'=>$users]);
+    }
+
+    public function show($id) {
+        $user = User::find($id);
+        return view('user.show', ['user'=>$user ]);
+    }
+
     public function edit() {
         return view('user.edit', ['user' => \Auth::user() ]);
     }

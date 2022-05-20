@@ -8,11 +8,19 @@
                 <div class="card-header">{{ __('編集画面') }}</div>
 
                 <div class="card-body">
+                  <div class="col offset-10">
+                    <form method="POST" action="{{ route('store.item.destroy', $item->id) }}">
+                      @csrf
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">
+                        {{ __('削除') }}
+                      </button>
+                    </form>
+                  </div>
                     <form method="POST" action="{{ route('store.item.update', $item->id) }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <div class="col-md-6 text-center">
+                            <div class="col-md-6 offset-md-3 text-center">
                               <img src="{{ asset('storage/item_images/'.$item->image) }}" id="img" width="100%" class="mt-4">
                             </div>
                         </div>
@@ -49,7 +57,7 @@
 
                         <div class="row mb-3">
 
-                            <div class="col-md-6 text-center">
+                            <div class="text-center">
                               <div class="form-check form-check-inline">
                                 <input id="is_active" type="radio" value="0" name="is_active" required autocomplete="is_active" autofocus @if ($item->is_active === 0)checked @endif>
                                 <label for="is_active" class="form-check-label">販売</label>
@@ -62,13 +70,17 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4 text-center">
+                            <div class="text-center">
+                              <div class="col-3 d-inline-block">
                                 <button type="submit" class="btn btn-secondary">
                                     {{ __('編集') }}
                                 </button>
+                              </div>
+                              <div class="col-3 d-inline-block">
                                 <a href="/store/home" class="btn btn-primary">
                                     {{ __('戻る') }}
                                 </a>
+                              </div>
                             </div>
                         </div>
                     </form>

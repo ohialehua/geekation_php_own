@@ -76,4 +76,8 @@ class ItemController extends Controller
         //リダイレクト
         return redirect('store/home')->with('msg_secondary', '商品情報を編集しました');
     }
+
+    public function destroy($id) {
+        $item = Item::find($id)->delete();
+        return redirect('store/home')->with('msg_warning', '商品を削除しました');    }
 }

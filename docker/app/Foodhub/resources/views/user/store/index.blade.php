@@ -5,8 +5,9 @@
   <div class="row mt-3">
     <div class="col-lg-9 mb-5">
       <h2>加盟店一覧</h2>
-      @foreach ($stores as $store)
-        <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+        @foreach ($stores as $store)
+        <a href="{{$store->id}}" class="text-dark">
           <div class="col">
             <div class="card mx-auto mt-4 shadow-lg text-center" style="border-radius: 10%;">
             @if ($store->profile_image === null)
@@ -27,8 +28,9 @@
               </div>
             </div>
           </div>
-        </div>
-      @endforeach
+        </a>
+        @endforeach
+      </div>
     </div>
     <div class="col-lg-3">
       <table class="table table-light">

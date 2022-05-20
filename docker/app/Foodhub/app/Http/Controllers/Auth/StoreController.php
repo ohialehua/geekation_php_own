@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
+use App\Models\Item;
 
 
 class StoreController extends Controller
@@ -32,6 +33,8 @@ class StoreController extends Controller
 
     public function show($id) {
         $store = Store::find($id);
-        return view('user.store.show', ['store'=>$store ]);
+        $items = Store::find($store->id)->items
+                ->sortByDesc('created_at');
+        return view('user.store.show', ['store'=>$store, 'items'=>$items]);
     }
 }

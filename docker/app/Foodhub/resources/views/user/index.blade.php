@@ -7,7 +7,7 @@
       <h2>会員一覧</h2>
       <table class="table table-light">
         <thead>
-          <td>プロフィール画像</td>
+          <td>プロフィール</td>
           <td>ユーザーネーム</td>
           <td>フォロー数</td>
           <td>フォロワー数</td>

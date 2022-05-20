@@ -83,14 +83,29 @@
         <h2>商品一覧</h2>
       </div>
       <div class="col-3 d-inline-block">
-        <a href="store/items/new" class="btn btn-sm btn-primary">商品を新規登録</a>
+        <a href="item/new" class="btn btn-sm btn-primary">商品を新規登録</a>
       </div>
       <table class="table table-light border text-center">
         <thead>
           <td>商品名</td>
           <td>税抜き価格</td>
+          <td>累計販売数</td>
           <td>ステータス</td>
         </thead>
+        <tbody>
+          @foreach ($items as $item)
+            <tr>
+              <td><a href="item/{{$item->id}}/edit" class="text-dark">{{$item->name}}</a></td>
+              <td>{{number_format($item->price_before_tax)}}円</td>
+              <td>{{$item->sales_figures}}</td>
+              @if ($item->is_active === 0)
+                <td><span class="badge bg-success">販売中</span></td>
+              @elseif ($item->is_active === 1)
+                <td><span class="badge bg-danger">販売停止中</span></td>
+              @endif
+            </tr>
+          @endforeach
+        </tbody>
       </table>
     </div>
 

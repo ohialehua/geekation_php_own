@@ -16,12 +16,12 @@ class CreateItemsTable extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('store_id')->nullable(false);
-            $table->string('image_id')->nullable(false);
+            $table->string('image')->nullable(false);
             $table->string('name')->nullable(false);
             $table->text('body')->nullable(false);
             $table->integer('price_before_tax')->nullable(false);
             $table->integer('sales_figures')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->nullable(false);
             $table->timestamps();
         });
     }

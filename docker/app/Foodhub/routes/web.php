@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('user/{id}',      'App\Http\Controllers\Auth\UserController@show')->name('user.show');
     Route::get('user/edit',      'App\Http\Controllers\Auth\UserController@edit')->name('user.edit');
     Route::post('user/edit',      'App\Http\Controllers\Auth\UserController@update')->name('user.update');
+    Route::get('user/store/index',      'App\Http\Controllers\Auth\StoreController@index')->name('user.store.index');
+    Route::get('user/store/{id}',      'App\Http\Controllers\Auth\StoreController@show')->name('user.store.show');
 });
 
 /*

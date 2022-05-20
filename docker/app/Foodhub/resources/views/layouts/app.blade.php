@@ -66,7 +66,7 @@
                                         {{ __('Users') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                    <a class="dropdown-item" href="{{ route('user.store.index') }}">
                                         {{ __('Stores') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('home') }}">

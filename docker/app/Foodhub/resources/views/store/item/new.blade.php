@@ -67,7 +67,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4 text-center">
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('商品画像の変更はできません。この内容で登録しますか？')">
                                     {{ __('この内容で商品を登録する') }}
                                 </button>
                             </div>

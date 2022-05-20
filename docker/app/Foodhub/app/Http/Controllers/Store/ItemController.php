@@ -56,40 +56,24 @@ class ItemController extends Controller
             return redirect('store/home')->with('msg_success', '新規商品を登録しました');
     }
 
-    public function show()
-    {
-        $store = \Auth::user();
-        return view('store.home', ['store'=>$store]);
-    }
-
-    public function edit() {
-        return view('store.edit', ['store' => \Auth::user() ]);
+    public function edit($id) {
+        $item = Item::find($id);
+        return view('store.item.edit', ['item'=>$item]);
     }
 
     public function update(Request $request) {
-
+        $item = Item::find($request->id);
     try {
         $params = $request->all();
-        $store = \Auth::user();
 
         //不要な「_token」の削除
         unset($params['_token']);
         //保存
-        $store->fill($params)->save();
-
-        // アップロードされたファイル
-        $profileImage = $request->file('profile_image');
-        if ($profileImage) {
-            $file_name  = $store->id . "." . $profileImage->clientExtension();
-            $path = $profileImage->storeAs('public/store_profiles', $file_name);
-            // profile_imageカラムにファイル名をを保存
-            $store->profile_image = basename($path);
-            $store->save();
-        }
+        $item->fill($params)->save();
     } catch (\Exception $e) {
         return back()->with('msg-danger', '編集に失敗しました');
     }
         //リダイレクト
-        return redirect('store/home')->with('msg_secondary', '加盟店情報を編集しました');
+        return redirect('store/home')->with('msg_secondary', '商品情報を編集しました');
     }
 }

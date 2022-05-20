@@ -89,13 +89,15 @@
         <thead>
           <td>商品名</td>
           <td>税抜き価格</td>
+          <td>累計販売数</td>
           <td>ステータス</td>
         </thead>
         <tbody>
           @foreach ($items as $item)
             <tr>
-              <td><a href="/item/edit" class="text-dark">{{$item->name}}</a></td>
+              <td><a href="item/{{$item->id}}/edit" class="text-dark">{{$item->name}}</a></td>
               <td>{{number_format($item->price_before_tax)}}円</td>
+              <td>{{$item->sales_figures}}</td>
               @if ($item->is_active === 0)
                 <td><span class="badge bg-success">販売中</span></td>
               @elseif ($item->is_active === 1)

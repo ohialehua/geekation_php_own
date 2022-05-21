@@ -66,7 +66,7 @@
       <div class="row mb-5">
         <div class="text-center">
           <div class="col-3 d-inline-block">
-            <a href="/home" class="btn btn-primary">
+            <a href="/user/delivery/index" class="btn btn-primary">
                 {{ __('配送先一覧') }}
             </a>
           </div>

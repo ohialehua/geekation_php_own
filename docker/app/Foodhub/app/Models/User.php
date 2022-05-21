@@ -17,6 +17,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function deliveries() {
+        return $this->hasMany(Delivery::class);
+    }
     protected $fillable = [
         'name',
         'introduction',

@@ -37,6 +37,11 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/edit',      'App\Http\Controllers\Auth\UserController@update')->name('user.update');
     Route::get('user/store/index',      'App\Http\Controllers\Auth\StoreController@index')->name('user.store.index');
     Route::get('user/store/{id}',      'App\Http\Controllers\Auth\StoreController@show')->name('user.store.show');
+    Route::get('user/delivery/index',      'App\Http\Controllers\Auth\DeliveryController@index')->name('user.delivery.index');
+    Route::post('user/delivery/create',      'App\Http\Controllers\Auth\DeliveryController@create')->name('user.delivery.create');
+    Route::get('user/delivery/edit/{id}',      'App\Http\Controllers\Auth\DeliveryController@edit')->name('user.delivery.edit');
+    Route::post('user/delivery/edit/{id}',      'App\Http\Controllers\Auth\DeliveryController@update')->name('user.delivery.update');
+    Route::post('user/delivery/delete/{id}',      'App\Http\Controllers\Auth\DeliveryController@destroy')->name('user.delivery.destroy');
 });
 
 /*

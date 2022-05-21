@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('user.index', ['users'=>$users]);
     }
 
-    public function show() {
+    public function show($id) {
         $user = User::find($id);
         return view('user.show', ['user'=>$user ]);
     }
@@ -53,7 +53,7 @@ class UserController extends Controller
         // アップロードされたファイル
         $profileImage = $request->file('profile_image_id');
         if ($profileImage) {
-            $file_name  = $user->id . "." . $profileImage->clientExtension();
+            $file_name  = $user->id . "." . $request->file('profile_image_id') . $profileImage->clientExtension();
             $path = $profileImage->storeAs('public/user_profiles', $file_name);
             // profile_imageカラムにファイル名をを保存
             $user->profile_image_id = basename($path);

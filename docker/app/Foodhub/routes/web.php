@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/delivery/delete/{id}',      'App\Http\Controllers\Auth\DeliveryController@destroy')->name('user.delivery.destroy');
     Route::get('user/item/index',                  'App\Http\Controllers\Auth\ItemController@index')->name('user.item.index');
     Route::get('user/item/{id}',                    'App\Http\Controllers\Auth\ItemController@show')->name('user.item.show');
+    Route::post('user/cart_item/create',      'App\Http\Controllers\Auth\CartItemController@create')->name('user.cart_item.create');
+    Route::post('user/cart_item/edit/{id}',      'App\Http\Controllers\Auth\CartItemController@update')->name('user.cart_item.update');
+    Route::post('user/cart_item/delete/{id}',      'App\Http\Controllers\Auth\CartItemController@destroy')->name('user.cart_item.destroy');
+    Route::post('user/cart_item/delete_all',      'App\Http\Controllers\Auth\CartItemController@destroy_all')->name('user.cart_item.destroy_all');
 });
 
 /*

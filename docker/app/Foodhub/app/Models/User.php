@@ -20,6 +20,10 @@ class User extends Authenticatable
     public function deliveries() {
         return $this->hasMany(Delivery::class);
     }
+    public function cart_items() {
+        return $this->hasMany(CartItem::class);
+    }
+
     protected $fillable = [
         'name',
         'introduction',

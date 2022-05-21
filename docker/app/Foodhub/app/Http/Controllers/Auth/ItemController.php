@@ -32,6 +32,9 @@ class ItemController extends Controller
 
     public function show($id) {
         $item = Item::find($id);
-        return view('user.item.show', ['item'=>$item ]);
+        $user = \Auth::user();
+        $Item = new Item;
+        $price_with_tax = $Item->price_with_tax();
+        return view('user.item.show', ['item'=>$item, 'user'=>$user, 'price_with_tax'=>$price_with_tax ]);
     }
 }

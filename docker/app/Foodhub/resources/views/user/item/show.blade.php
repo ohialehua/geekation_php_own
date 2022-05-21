@@ -30,6 +30,21 @@
           <div class="card-body border" style="border-radius: 10px;">
             {{$item->body}}
           </div>
+
+          <div class="col offset-8 mt-3">
+            <form method="POST" action="{{ route('user.cart_item.create') }}">
+            @csrf
+              <input id="item_id" name="item_id" type="hidden" value="{{$item->id}}">
+              <select id="quantity" type="number" name="quantity">
+                @for ($i=1; $i <= 20; $i++)
+                  <option value="{{$i}}">{{$i}}</option>
+                @endfor
+              </select>
+              <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('本当に削除しますか？')">
+                {{ __('カートに追加') }}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -46,6 +61,15 @@
               <td>小計</td>
               <td></td>
             </tr>
+          @foreach ($user->cart_items as $cart_item)
+            <tr>
+              <td>{{$cart_item->item->name}}</td>
+              <td>{{$cart_item->item->price_with_tax}}</td>
+              <td>{{$cart_item->quantity}}</td>
+              <td><?php echo ($cart_item->item->price_before_tax) * ($cart_item->quantity) ?></td>
+              <td>{{$cart_item->item->name}}</td>
+            </tr>
+          @endforeach
           </tbody>
         </table>
       </div>

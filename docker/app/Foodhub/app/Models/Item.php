@@ -12,6 +12,9 @@ class Item extends Model
     public function store() { //1対多の「１」側なので単数系
         return $this->belongsTo(Store::class);
     }
+    public function cart_items() {
+        return $this->hasMany(CartItem::class);
+    }
 
     protected $fillable = [
         'store_id',
@@ -22,4 +25,12 @@ class Item extends Model
         'sales_figures',
         'is_active',
     ];
+
+    // public function price_with_tax() {
+    //     $price_before_tax = Item::get('price_before_tax');
+    //     foreach ($price_before_tax as $pbt) {
+    //       (int)$pbt * 1.1;
+    //     }
+    //     return $pbt;
+    // }
 }

@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('user.index', ['users'=>$users]);
     }
 
-    public function show($id) {
+    public function show() {
         $user = User::find($id);
         return view('user.show', ['user'=>$user ]);
     }

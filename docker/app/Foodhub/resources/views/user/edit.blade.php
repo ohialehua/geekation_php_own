@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('編集画面') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.update') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row mb-3">
@@ -38,7 +38,11 @@
 
                             <div class="col-md-6 text-center">
                               <input id="profile_image_id" type="file" class="form-control" name="profile_image_id" value="{{ $user->profile_image_id }}" accept="image/png, image/jpeg" onchange="previewImage(this);">
+                            @if ($user->profile_image_id)
                               <img src="{{ asset('storage/user_profiles/'.$user->profile_image_id) }}" id="img" width="50%" class="mt-4">
+                            @else
+                              <img src="{{ asset('storage/no_image.png') }}" id="img" width="50%" class="mt-4">
+                            @endif
                             </div>
                         </div>
 
@@ -54,7 +58,7 @@
                     <div class="border-bottom my-4"></div>
 
                     @unless($user->full_name && $user->full_name_kana && $user->phone_number)
-                    <form method="POST" action="{{ route('user.update') }}">
+                    <form method="POST" action="{{ route('user.update', $user->id) }}">
                         @csrf
 
                         <div class="row mb-3">

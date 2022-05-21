@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Delivery;
 use App\Models\User;
 
-class ItemController extends Controller
+class DeliveryController extends Controller
 {
    /**
      * Create a new controller instance.
@@ -27,8 +27,10 @@ class ItemController extends Controller
     public function index()
     {
         $user = \Auth::user();
+        $deliveries = User::find($user->id)->deliveries
+        ->sortByDesc('created_at');
         if ($user->full_name && $user->full_name_kana && $user->phone_number) {
-            return view('user.delivery.index');
+            return view('user.delivery.index', ['deliveries'=>$deliveries]);
         } else {
             return view('user.edit')->with('msg_info', '個人情報を登録してください');
         }

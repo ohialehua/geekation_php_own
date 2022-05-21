@@ -29,4 +29,9 @@ class ItemController extends Controller
         $items = Item::all();
         return view('user.item.index', ['items'=>$items]);
     }
+
+    public function show($id) {
+        $item = Item::find($id);
+        return view('user.item.show', ['item'=>$item ]);
+    }
 }

@@ -22,6 +22,7 @@
                     <p class="card-text"> 説明：{{$item->body}}</p>
                   </div>
                 </div>
+                <div class="card bg-warning">¥ {{number_format($item->price_before_tax)}}</div>
               </div>
             </div>
           </div>

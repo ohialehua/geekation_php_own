@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/delivery/edit/{id}',      'App\Http\Controllers\Auth\DeliveryController@update')->name('user.delivery.update');
     Route::post('user/delivery/delete/{id}',      'App\Http\Controllers\Auth\DeliveryController@destroy')->name('user.delivery.destroy');
     Route::get('user/item/index',                  'App\Http\Controllers\Auth\ItemController@index')->name('user.item.index');
+    Route::get('user/item/{id}',                    'App\Http\Controllers\Auth\ItemController@show')->name('user.item.show');
 });
 
 /*

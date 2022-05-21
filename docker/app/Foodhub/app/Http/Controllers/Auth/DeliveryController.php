@@ -32,7 +32,7 @@ class DeliveryController extends Controller
         if ($user->full_name && $user->full_name_kana && $user->phone_number) {
             return view('user.delivery.index', ['deliveries'=>$deliveries]);
         } else {
-            return view('user.edit')->with('msg_info', '個人情報を登録してください');
+            return redirect('user/edit/{{$user->id}}')->with('msg_warning', '個人情報を登録してください');
         }
     }
 

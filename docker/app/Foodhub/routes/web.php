@@ -33,8 +33,8 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('home', 'App\Http\Controllers\Auth\HomeController@show')->name('home');
     Route::get('user/index',      'App\Http\Controllers\Auth\UserController@index')->name('user.index');
     Route::get('user/{id}',      'App\Http\Controllers\Auth\UserController@show')->name('user.show');
-    Route::get('user/edit',      'App\Http\Controllers\Auth\UserController@edit')->name('user.edit');
-    Route::post('user/edit',      'App\Http\Controllers\Auth\UserController@update')->name('user.update');
+    Route::get('user/edit/{id}',      'App\Http\Controllers\Auth\UserController@edit')->name('user.edit');
+    Route::post('user/edit/{id}',      'App\Http\Controllers\Auth\UserController@update')->name('user.update');
     Route::get('user/store/index',      'App\Http\Controllers\Auth\StoreController@index')->name('user.store.index');
     Route::get('user/store/{id}',      'App\Http\Controllers\Auth\StoreController@show')->name('user.store.show');
     Route::get('user/delivery/index',      'App\Http\Controllers\Auth\DeliveryController@index')->name('user.delivery.index');

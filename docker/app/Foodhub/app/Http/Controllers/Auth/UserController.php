@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('user.index', ['users'=>$users]);
     }
 
-    public function show() {
+    public function show($id) {
         $user = User::find($id);
         return view('user.show', ['user'=>$user ]);
     }
@@ -60,7 +60,7 @@ class UserController extends Controller
             $user->save();
         }
     } catch (\Exception $e) {
-        return back()->with('msg-danger', '編集に失敗しました');
+        return back()->with('msg_danger', '編集に失敗しました');
     }
         //リダイレクト
         return redirect('/home')->with('msg_secondary', '会員情報を編集しました');

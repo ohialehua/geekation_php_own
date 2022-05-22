@@ -23,6 +23,10 @@ class Store extends Authenticatable
     public function items() {
         return $this->hasMany(Item::class);
     }
+    public function store_orders() {
+        return $this->hasMany(StoreOrder::class);
+    }
+
     protected $fillable = [
         'name',
         'name_kana',

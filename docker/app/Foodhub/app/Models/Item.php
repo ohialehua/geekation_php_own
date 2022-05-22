@@ -26,11 +26,9 @@ class Item extends Model
         'is_active',
     ];
 
-    // public function price_with_tax() {
-    //     $price_before_tax = Item::get('price_before_tax');
-    //     foreach ($price_before_tax as $pbt) {
-    //       (int)$pbt * 1.1;
-    //     }
-    //     return $pbt;
+    // public function tax(float $price_before_tax) {
+    //     $taxRate = 1.1;
+    //     $price_with_tax = $price_before_tax * $taxRate;
+    //     return $price_with_tax;
     // }
 }

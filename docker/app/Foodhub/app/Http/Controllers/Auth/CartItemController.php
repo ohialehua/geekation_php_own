@@ -63,16 +63,18 @@ class CartItemController extends Controller
         return back()->with('msg_danger', 'カート情報の変更に失敗しました');
     }
         //リダイレクト
-        return back()->with('msg_primary', '{{$cart_item->item->name}}を{{$request->quantity}}個から{{$cart_item->quantity}}に変更しました');
+        return back()->with('msg_primary', "{$cart_item->item->name}を{$request->quantity}個から{$cart_item->quantity}に変更しました");
     }
 
     public function destroy($id) {
-        $cart_item = CartItem::find($id)->delete();
-        return back()->with('msg_warning', '{{$cart_item->item->name}}をカートから削除しました');
+        $cart_item = CartItem::find($id);
+        $name = $cart_item->item->name;
+        $cart_item->delete();
+        return back()->with('msg_warning', "{$name}をカートから戻しました");
     }
 
     public function destroy_all(Request $request) {
-        $cart_item = CartItem::find($request->user_id)->delete();
-        return back()->with('msg_danger', 'カートの中身を全て削除しました');
+        $cart_item = CartItem::query($request->user_id)->delete();
+        return back()->with('msg_danger', 'カートの中身を全て戻しました');
     }
 }

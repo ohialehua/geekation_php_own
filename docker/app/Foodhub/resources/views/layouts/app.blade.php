@@ -97,7 +97,7 @@
             </div>
           @elseif (session('msg_danger'))
             <div class="col-8 mx-auto mb-2 text-center px-4 py-3 border rounded bg-danger" role="alert">
-              <p class="my-auto">{{ session('msg_danger') }}</p>
+              <p class="my-auto text-white">{{ session('msg_danger') }}</p>
             </div>
           @elseif (session('msg_info'))
             <div class="col-8 mx-auto mb-2 text-center px-4 py-3 border rounded bg-info" role="alert">

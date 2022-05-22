@@ -53,17 +53,14 @@ class CartItemController extends Controller
     public function update(Request $request) {
         $cart_item = CartItem::find($request->id);
     try {
-        $params = $request->all();
-
-        //不要な「_token」の削除
-        unset($params['_token']);
-        //保存
-        $cart_item->fill($params)->save();
+        $quantity = $cart_item->quantity;
+        $cart_item->quantity = $request->quantity;
+        $cart_item->save();
     } catch (\Exception $e) {
         return back()->with('msg_danger', 'カート情報の変更に失敗しました');
     }
         //リダイレクト
-        return back()->with('msg_primary', "{$cart_item->item->name}を{$request->quantity}個から{$cart_item->quantity}に変更しました");
+        return back()->with('msg_info', "{$cart_item->item->name}を{$quantity}個から{$cart_item->quantity}個に変更しました");
     }
 
     public function destroy($id) {

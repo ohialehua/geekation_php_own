@@ -78,7 +78,20 @@
             <tr>
               <td>{{$cart_item->item->name}}</td>
               <td>{{number_format($cart_item->item->price_before_tax * $tax)}}</td>
-              <td>{{$cart_item->quantity}}</td>
+              <td>
+                <form method="POST" action="{{ route('user.cart_item.update', $cart_item->id) }}">
+                @csrf
+                  <input id="item_id" name="item_id" type="hidden" value="{{$cart_item->item->id}}">
+                  <select id="quantity" type="number" name="quantity">
+                    @for ($i=1; $i <= 20; $i++)
+                      <option value="{{$i}}" @if( $cart_item->quantity === $i ) selected @endif> {{$i}} </option>
+                    @endfor
+                  </select>
+                  <button type="submit" class="btn btn-sm btn-secondary">
+                    {{ __('変更') }}
+                  </button>
+                </form>
+              </td>
               <td>{{number_format($cart_item->item->price_before_tax * $tax * $cart_item->quantity) }}円</td>
               <?php $total_price += $cart_item->item->price_before_tax * $tax * $cart_item->quantity ?>
               <td>

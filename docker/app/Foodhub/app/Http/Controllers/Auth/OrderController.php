@@ -77,37 +77,39 @@ class OrderController extends Controller
     public function create(Request $request){
         $tax = 1.1;
         $user = \Auth::user();
-        $cart_items = CartItem::whereUserId($user->id)->first();
+        $cart_items = CartItem::whereUserId($user->id)->get();
         // try {
                 $order = new Order($request->all());
                 $order->user_id = $request->user()->id;
+                $order->save();
                 foreach ($cart_items as $ci) {
-                    // $store = Store::whereId($ci->item->store_id)->get();
-                    $store = Store::whereHas('items.cart_items', function($q) use($user){
+                    $stores = Store::whereHas('items.cart_items', function($q) use($user) {
                         $q->whereUserId($user->id);
-                    })->get();
-                //     $store_order_id = nil;
-                    // if (StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->count() == 0) {
+                    })->distinct()->get();
+                    foreach ($stores as $store) {
+                      if (StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->count() == 0) {
                         $store_order = StoreOrder::create([
                             'user_id' => $user->id,
                             'order_id' => $order->id,
                             'store_id' => $store->id,
                         ]);
-                    // } else {
-                    //     $store_order_id = StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->first();
-                    // }
-                    // $order_item = new OrderItem();
-                    // $order_item->store_order_id = $store_order_id;
-                    // $order_item->order_id = $order->id;
-                    // $order_item->item_id = $ci->item_id;
-                    // $order_item->quantity = $ci->quantity;
-                    // $order_item->$price_after_tax = $ci->item->price_before_tax * $tax;
-                    // $order_item->save();
+                        $store_order_id = $store_order->id;
+                      } else {
+                        $store_order_id = StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->first()->id;
+                      }
+                    }
+
+                    $order_item = OrderItem::create([
+                        'order_id' => $order->id,
+                        'store_order_id' => $store_order_id,
+                        'item_id' => $ci->item->id,
+                        'quantity' => $ci->quantity,
+                        'price_after_tax' => $ci->item->price_before_tax * $tax,
+                      ]);
                 }
             // 不要な「_token」の削除
             unset($order['_token']);
             //保存
-            $order->save();
         // } catch (\Exception $e) {
         //     return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
         // }

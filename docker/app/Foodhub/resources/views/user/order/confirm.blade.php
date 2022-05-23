@@ -80,9 +80,15 @@
                       <input id="post_address" name="post_address" type="hidden" value="{{$delivery->post_address}}">
                       <input id="address" name="address" type="hidden" value="{{$delivery->address}}">
                       <input id="name" name="name" type="hidden" value="{{$delivery->name}}">
-                      <button type="submit" class="btn btn-success">
-                        {{ __('注文確定') }}
-                      </button>
+                      @if ($pay_method == 0)
+                        <button type="submit" class="btn btn-info">
+                          {{ __('カードで支払う') }}
+                        </button>
+                      @else
+                        <button type="submit" class="btn btn-success">
+                          {{ __('注文確定') }}
+                        </button>
+                      @endif
                     </form>
                   </div>
                 </div>

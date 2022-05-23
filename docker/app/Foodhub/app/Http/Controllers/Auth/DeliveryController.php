@@ -46,7 +46,7 @@ class DeliveryController extends Controller
             unset($delivery['_token']);
             //保存
         } catch (\Exception $e) {
-            return back()->with('msg-danger', '配送先登録に失敗しました');
+            return back()->with('msg_danger', '配送先登録に失敗しました');
         }
             //リダイレクト
             return redirect('user/delivery/index')->with('msg_success', '新しい配送先を登録しました');

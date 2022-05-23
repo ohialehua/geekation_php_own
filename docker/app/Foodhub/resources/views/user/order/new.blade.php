@@ -54,7 +54,7 @@
 
               <div class="row mb-3">
                 <div class="form-check form-check-inline">
-                  <input id="delivery_method" type="radio" value="0" name="delivery_method" required autocomplete="delivery_method">
+                  <input id="delivery_method" type="radio" value="1" name="delivery_method" required autocomplete="delivery_method">
                   <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('新しいお届け先') }}</label>
                 </div>
 

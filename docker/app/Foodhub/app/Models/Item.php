@@ -15,6 +15,9 @@ class Item extends Model
     public function cart_items() {
         return $this->hasMany(CartItem::class);
     }
+    public function order_items() {
+        return $this->hasMany(OrderItem::class);
+    }
 
     protected $fillable = [
         'store_id',

@@ -78,16 +78,15 @@ class OrderController extends Controller
         $tax = 1.1;
         $user = \Auth::user();
         $cart_items = CartItem::whereUserId($user->id)->get();
-        // try {
+        try {
                 $order = new Order($request->all());
                 $order->user_id = $request->user()->id;
                 $order->save();
-                foreach ($cart_items as $ci) {
-                    $stores = Store::whereHas('items.cart_items', function($q) use($user) {
-                        $q->whereUserId($user->id);
-                    })->distinct()->get();
-                    foreach ($stores as $store) {
+                foreach ($cart_items as $cart_item) {
+                    $store = $cart_item->item->store;
+                    //  カート内の商品の加盟店で、この注文でまだ$store_orderができていないなら
                       if (StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->count() == 0) {
+                    //  加盟店ごとの注文書を作成
                         $store_order = StoreOrder::create([
                             'user_id' => $user->id,
                             'order_id' => $order->id,
@@ -95,29 +94,34 @@ class OrderController extends Controller
                         ]);
                         $store_order_id = $store_order->id;
                       } else {
+                    //  既にある加盟店ごとの注文書の一番目のIDを取得
                         $store_order_id = StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->first()->id;
                       }
-                    }
 
                     $order_item = OrderItem::create([
                         'order_id' => $order->id,
                         'store_order_id' => $store_order_id,
-                        'item_id' => $ci->item->id,
-                        'quantity' => $ci->quantity,
-                        'price_after_tax' => $ci->item->price_before_tax * $tax,
+                        'item_id' => $cart_item->item->id,
+                        'quantity' => $cart_item->quantity,
+                        'price_after_tax' => $cart_item->item->price_before_tax * $tax,
                       ]);
                 }
+            //  カート内商品の削除
+                CartItem::query($request->user_id)->delete();
             // 不要な「_token」の削除
             unset($order['_token']);
             //保存
-        // } catch (\Exception $e) {
-        //     return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
-        // }
+        } catch (\Exception $e) {
+            return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
+        }
         return redirect('user/order/complete')->with('msg_success', '注文を完了しました');
     }
 
     public function complete(){
-        return view('user.order.complete');
+        $user = \Auth::user();
+        $order = Order::whereUserId($user->id)->latest()->first();
+        $order_items = OrderItem::whereOrderId($order->id)->get();
+        return view('user.order.complete', ['order'=>$order, 'order_items'=>$order_items]);
     }
 
     public function index(){

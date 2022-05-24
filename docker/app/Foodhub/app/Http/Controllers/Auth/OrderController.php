@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 use App\Models\StoreOrder;
 use App\Models\OrderItem;
@@ -32,13 +33,18 @@ class OrderController extends Controller
      */
     public function new(){
         $user = \Auth::user();
-        $deliveries = Delivery::whereUserId($user->id)->get();
-        return view('user.order.new', ['deliveries'=>$deliveries]);
+        $deliveries = $user->deliveries;
+        $cart_items = $user->cart_items;
+        if ($cart_items) {
+            return view('user.order.new', ['deliveries'=>$deliveries, 'cart_items'=>$cart_items]);
+        } else {
+            return back()->with('msg_warning', 'カートに商品を入れてください');
+        }
     }
 
     public function confirm(Request $request){
         $user = \Auth::user();
-        $cart_items = CartItem::whereUserId($user->id)->get();
+        $cart_items = $user->cart_items;
         $tax = 1.1;
         $pay_method = $request->pay_method;
         if ($request->delivery_method == 0) {
@@ -77,8 +83,11 @@ class OrderController extends Controller
     public function create(Request $request){
         $tax = 1.1;
         $user = \Auth::user();
-        $cart_items = CartItem::whereUserId($user->id)->get();
-        try {
+        $cart_items = $user->cart_items;
+
+        DB::beginTransaction();
+
+        // try {
                 $order = new Order($request->all());
                 $order->user_id = $request->user()->id;
                 $order->save();
@@ -105,22 +114,42 @@ class OrderController extends Controller
                         'quantity' => $cart_item->quantity,
                         'price_after_tax' => $cart_item->item->price_before_tax * $tax,
                       ]);
+                //  商品の累計数加算
+                    $item = Item::find($cart_item->item_id);
+                    $item->sales_figures += $order_item->quantity;
+                    $item->save();
                 }
             //  カート内商品の削除
                 CartItem::query($request->user_id)->delete();
+
+            if ($order->pay_method == 0) {
+            //  シークレットキーを設定
+                \Payjp\Payjp::setApiKey(config('payjp.secret_key'));
+
+            //  支払い処理
+            // 新規支払い情報作成
+                \Payjp\Charge::create([
+                  "card" => $request->get('payjp-token'),
+                  "amount" => $order->total_price,
+                  "currency" => 'jpy',
+                ]);
+            }
+
             // 不要な「_token」の削除
             unset($order['_token']);
             //保存
-        } catch (\Exception $e) {
-            return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
-        }
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
+        // }
+        DB::commit();
         return redirect('user/order/complete')->with('msg_success', '注文を完了しました');
     }
 
     public function complete(){
         $user = \Auth::user();
         $order = Order::whereUserId($user->id)->latest()->first();
-        $order_items = OrderItem::whereOrderId($order->id)->get();
+        $order_items = $order->order_items;
         return view('user.order.complete', ['order'=>$order, 'order_items'=>$order_items]);
     }
 

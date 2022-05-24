@@ -42,10 +42,23 @@
                     @endforeach
                   </tbody>
                   <tbody>
-                    <tr>
+                    <tr style="vertical-align: middle;">
                       <td colspan="2">商品合計：{{number_format($total_price)}}円</td>
-                      <td>送料：{{$postage}}円</td>
-                      <td colspan="2">請求金額：<p class="d-inline-block" style="background: linear-gradient(transparent 70%, #ffff66 0%);">{{number_format($total_price + $postage)}}円</p></td>
+                      <td>
+                        送料：{{$postage}}円<br>
+                        (購入店舗数×200)
+                      </td>
+                      <td colspan="2">
+                        <div class="mt-3">
+                          <strong>
+                            請求金額：
+                            <p class="d-inline-block"
+                               style="background: linear-gradient(transparent 70%, #ffff66 0%);">
+                               {{number_format($total_price + $postage)}}円
+                            </p>
+                          </strong>
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -81,9 +94,12 @@
                       <input id="address" name="address" type="hidden" value="{{$delivery->address}}">
                       <input id="name" name="name" type="hidden" value="{{$delivery->name}}">
                       @if ($pay_method == 0)
-                        <button type="submit" class="btn btn-info">
-                          {{ __('カードで支払う') }}
-                        </button>
+                          <script
+                            type="text/javascript"
+                            src="https://checkout.pay.jp/"
+                            class="payjp-button"
+                            data-key="{{ config('payjp.public_key') }}">
+                          </script>
                       @else
                         <button type="submit" class="btn btn-success">
                           {{ __('注文確定') }}

@@ -35,6 +35,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <?php $subtotal = 0 ?>
                     @foreach ($order_items as $order_item)
                       <tr>
                         <td>{{$order_item->item->store->name}}</td>
@@ -42,14 +43,15 @@
                         <td>{{number_format($order_item->price_after_tax)}}円</td>
                         <td>{{$order_item->quantity}}</td>
                         <td>{{number_format($order_item->price_after_tax * $order_item->quantity)}}円</td>
+                        <?php $subtotal += $order_item->price_after_tax * $order_item->quantity ?>
                       </tr>
                     @endforeach
                   </tbody>
                   <tbody>
                     <tr>
-                      <td colspan="2">商品合計：{{number_format($order->total_price)}}円</td>
+                      <td colspan="2">商品合計：{{number_format($subtotal)}}円</td>
                       <td>送料：{{$order->postage}}円</td>
-                      <td colspan="2">請求金額：<p class="d-inline-block" style="background: linear-gradient(transparent 70%, #ffff66 0%);">{{number_format($order->total_price + $order->postage)}}円</p></td>
+                      <td colspan="2">ご請求金額：<p class="d-inline-block" style="background: linear-gradient(transparent 70%, #ffff66 0%);">{{number_format($order->total_price)}}円</p></td>
                     </tr>
                   </tbody>
                 </table>

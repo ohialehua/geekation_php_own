@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <div class="row mt-3">
+  <div class="row  justify-content-center">
     <div class="col-lg-9">
       <div class="card mb-5">
         <div class="card-header">{{ __('注文履歴一覧') }}</div>

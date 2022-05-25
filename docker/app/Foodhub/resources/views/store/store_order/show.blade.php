@@ -1,9 +1,4 @@
-<!-- ★ -->
-<?php
-  use App\Models\OrderItem;
-  use App\Models\StoreOrder;
- ?>
-@extends('layouts.app')
+@extends('layouts.app_store')
 
 @section('content')
 <div class="container">
@@ -114,7 +109,7 @@
                       @csrf
                       <td>
                         <input id="order_item_id" name="order_item_id" type="hidden" value="{{$order_item->id}}">
-                        <select id="product_status" class="form-control" type="number" name="order_status">
+                        <select id="product_status" class="form-control" type="number" name="product_status">
                           <option value="0" @if( $order_item->product_status === 0 ) selected @endif>入金前</option>
                           <option value="1" @if( $order_item->product_status === 1 ) selected @endif>製作待ち</option>
                           <option value="2" @if( $order_item->product_status === 2 ) selected @endif>製作中</option>
@@ -123,7 +118,7 @@
                       </td>
                       <td>
                         <button type="submit" class="btn btn-sm btn-secondary d-inline-block">
-                          {{ __('変更') }}
+                          {{ __('更新') }}
                         </button>
                       </td>
                       </form>

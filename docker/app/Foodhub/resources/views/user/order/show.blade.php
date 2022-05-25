@@ -13,7 +13,7 @@
         <div class="card-header">{{ __('注文情報詳細') }}</div>
           <div class="card-body">
             <div class="row">
-              <div class="col-8">
+              <div class="col-md-8">
                 <table class="table table-light border text-center">
                   <tbody>
                     <tr>
@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                       <td>発送状況</td>
-                    @if (StoreOrder::whereOrderId($order->id) ->whereOrderStatus(0, 1, 2, 3))
+                    @if (StoreOrder::whereOrderId($order->id) ->whereIn('order_status', [0, 1, 2, 3]) ->count() > 0)
                       <td class="text-danger">
                         まだ発送されていない商品があります
                       </td>
@@ -58,7 +58,7 @@
                 </table>
               </div>
 
-              <div class="col-4">
+              <div class="col-md-4">
                 <div class="card">
                   <div class="card-header">{{ __('注文した情報の確認') }}</div>
                     <div class="card-body">
@@ -86,7 +86,7 @@
               <div class="col">
               @foreach ($store_orders as $store_order)
               <div class="row">
-                <div class="mt-4 col-6">
+                <div class="mt-4 col-5">
                   <a href="/user/store/{{$store_order->store->id}}" class="text-dark" title='"{{$store_order->store->name}}"のページを見る'>
                   @if ($store_order->store->profile_image === null)
                     <img src="/storage/no_image.png" width="100" height="100" >
@@ -97,12 +97,12 @@
                     <strong><label class="my-1">"{{$store_order->store->name}}"での注文内容</label></strong>
                   </a>
                 </div>
-                <div class="col-6" style="padding-top: 130px;">
+                <div class="col-7" style="padding-top: 130px;">
                   <strong>
-                  @if (OrderItem::whereStoreOrderId($store_order->id) ->whereProductStatus(0, 1, 2))
-                    <label class="text-danger text-bottom ml-5">注文状況：まだ製作中の商品があります</label>
+                  @if ($store_order->order_status == 4)
+                    <label class="text-success">注文状況：発送完了</label>
                   @else
-                    <label class="text-right ml-5">注文状況：製作完了</label>
+                    <label class="text-danger">注文状況：まだ発送されていない商品があります</label>
                   @endif
                   </strong>
                 </div>
@@ -138,8 +138,10 @@
                       @if ($order_item->product_status == 0)
                         製作待ち
                       @elseif ($order_item->product_status == 1)
-                        製作中
+                        入金確認
                       @elseif ($order_item->product_status == 2)
+                        製作中
+                      @elseif ($order_item->product_status == 3)
                         製作完了
                       @endif
                       </td>

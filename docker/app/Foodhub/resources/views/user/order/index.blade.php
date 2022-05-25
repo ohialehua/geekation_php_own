@@ -48,7 +48,7 @@
                     </td>
                     <td>{{number_format($order->total_price)}}円</td>
                     <!-- ★ここで使用 -->
-                  @if (StoreOrder::whereOrderId($order->id) ->whereOrderStatus(0, 1, 2, 3))
+                    @if (StoreOrder::whereOrderId($order->id) ->whereIn('order_status', [0, 1, 2, 3]) ->count() > 0)
                     <td class="text-danger">
                       まだ発送されていない商品があります
                     </td>

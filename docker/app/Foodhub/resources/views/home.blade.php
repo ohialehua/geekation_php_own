@@ -71,7 +71,7 @@
             </a>
           </div>
           <div class="col-3 d-inline-block">
-            <a href="/home" class="btn btn-primary">
+            <a href="/user/order/index" class="btn btn-primary">
                 {{ __('注文履歴一覧') }}
             </a>
           </div>

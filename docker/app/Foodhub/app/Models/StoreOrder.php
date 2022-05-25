@@ -15,8 +15,8 @@ class StoreOrder extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
-    public function item() {
-        return $this->belongsTo(Item::class);
+    public function store() {
+        return $this->belongsTo(Store::class);
     }
     public function order() {
         return $this->belongsTo(Order::class);

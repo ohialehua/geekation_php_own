@@ -48,13 +48,13 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/cart_item/edit/{id}',      'App\Http\Controllers\Auth\CartItemController@update')->name('user.cart_item.update');
     Route::post('user/cart_item/delete/{id}',      'App\Http\Controllers\Auth\CartItemController@destroy')->name('user.cart_item.destroy');
     Route::post('user/cart_item/delete_all',      'App\Http\Controllers\Auth\CartItemController@destroy_all')->name('user.cart_item.destroy_all');
-    Route::get('user/order/index',                  'App\Http\Controllers\Auth\OrderController@index')->name('user.order.index');
     Route::get('user/order/new',                  'App\Http\Controllers\Auth\OrderController@new')->name('user.order.new');
     Route::get('user/order/confirm',                  'App\Http\Controllers\Auth\OrderController@confirm')->name('user.order.confirm');
     Route::post('user/order/create',                  'App\Http\Controllers\Auth\OrderController@create')->name('user.order.create');
     Route::post('user/store_order/create',                  'App\Http\Controllers\Auth\StoreOrderController@create')->name('user.store_order.create');
     Route::post('user/order_item/create',                  'App\Http\Controllers\Auth\OrderItemController@create')->name('user.order_item.create');
     Route::get('user/order/complete',                  'App\Http\Controllers\Auth\OrderController@complete')->name('user.order.complete');
+    Route::get('user/order/index',                  'App\Http\Controllers\Auth\OrderController@index')->name('user.order.index');
     Route::get('user/order/{id}',                  'App\Http\Controllers\Auth\OrderController@show')->name('user.order.show');
 });
 

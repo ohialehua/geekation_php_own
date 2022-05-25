@@ -154,10 +154,15 @@ class OrderController extends Controller
     }
 
     public function index(){
+        $user = \Auth::user();
+        $orders = Order::whereUserId($user->id)->get()
+                  ->sortByDesc('created_at');
+        return view('user.order.index', ['orders'=>$orders]);
     }
 
     public function show($id) {
         $order = Order::find($id);
-        return view('user.order.show', ['order'=>$order]);
+        $store_orders = $order->store_orders;
+        return view('user.order.show', ['order'=>$order, 'store_orders'=>$store_orders]);
     }
 }

@@ -21,6 +21,7 @@
 </head>
 <body>
     <div id="app">
+    </div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -66,7 +67,7 @@
                                         {{ __('Customers') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('store.home') }}">
+                                    <a class="dropdown-item" href="{{ route('store.store_order.index') }}">
                                         {{ __('Orders') }}
                                     </a>
 
@@ -111,7 +112,6 @@
           @endif
             @yield('content')
         </main>
-    </div>
     <footer class="py-3">
       <div class="container text-center text-black">
         <p>© Copyright 2022 Foodhub All rights reserved.</p>

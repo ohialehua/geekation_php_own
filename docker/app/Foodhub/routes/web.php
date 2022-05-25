@@ -51,8 +51,6 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('user/order/new',                  'App\Http\Controllers\Auth\OrderController@new')->name('user.order.new');
     Route::get('user/order/confirm',                  'App\Http\Controllers\Auth\OrderController@confirm')->name('user.order.confirm');
     Route::post('user/order/create',                  'App\Http\Controllers\Auth\OrderController@create')->name('user.order.create');
-    Route::post('user/store_order/create',                  'App\Http\Controllers\Auth\StoreOrderController@create')->name('user.store_order.create');
-    Route::post('user/order_item/create',                  'App\Http\Controllers\Auth\OrderItemController@create')->name('user.order_item.create');
     Route::get('user/order/complete',                  'App\Http\Controllers\Auth\OrderController@complete')->name('user.order.complete');
     Route::get('user/order/index',                  'App\Http\Controllers\Auth\OrderController@index')->name('user.order.index');
     Route::get('user/order/{id}',                  'App\Http\Controllers\Auth\OrderController@show')->name('user.order.show');
@@ -104,4 +102,8 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::get('item/{id}/edit',    'App\Http\Controllers\Store\ItemController@edit')->name('store.item.edit');
     Route::post('item/{id}/edit',      'App\Http\Controllers\Store\ItemController@update')->name('store.item.update');
     Route::post('item/{id}/delete',      'App\Http\Controllers\Store\ItemController@destroy')->name('store.item.destroy');
+    Route::get('store_order/index',             'App\Http\Controllers\Store\StoreOrderController@index')->name('store.store_order.index');
+    Route::get('store_order/{id}',             'App\Http\Controllers\Store\StoreOrderController@show')->name('store.store_order.show');
+    Route::post('store_order/{id}/edit',      'App\Http\Controllers\Store\StoreOrderController@update')->name('store.store_order.update');
+    Route::post('order_item/edit/{id}',      'App\Http\Controllers\Store\OrderItemController@update')->name('store.order_item.update');
 });

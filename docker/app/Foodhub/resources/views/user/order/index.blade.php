@@ -57,7 +57,7 @@
                       全ての商品が発送されました
                     </td>
                   @endif
-                    <td><a href="{{$order->id}}" class="text-dark">Show</a></td>
+                    <td><a href="{{$order->id}}" class="text-dark">表示</a></td>
                   </tr>
                 @endforeach
               </table>

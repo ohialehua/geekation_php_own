@@ -5,8 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <!-- <div class="card-header">{{ __('Dashboard') }}</div> -->
-
+        <div class="card-header">{{ __('管理人より') }}</div>
           <div class="card-body">
           @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -33,7 +32,7 @@
         <ul>
           <a href="edit" class="btn btn-sm btn-secondary mb-2">編集</a>
           <a href="unsubscribe" class="btn btn-sm btn-danger mb-2">退会</a>
-          <a href="orders" class="btn btn-sm btn-primary">注文履歴一覧</a>
+          <a href="store_order/index" class="btn btn-sm btn-primary">注文履歴一覧</a>
         </ul>
       </div>
       <div class="col text-right"><a>フォロワー数：○○</a></div>

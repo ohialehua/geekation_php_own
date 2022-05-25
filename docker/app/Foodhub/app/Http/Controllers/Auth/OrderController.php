@@ -87,7 +87,7 @@ class OrderController extends Controller
 
         DB::beginTransaction();
 
-        // try {
+        try {
                 $order = new Order($request->all());
                 $order->user_id = $request->user()->id;
                 $order->save();
@@ -138,10 +138,10 @@ class OrderController extends Controller
             // 不要な「_token」の削除
             unset($order['_token']);
             //保存
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
-        // }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
+        }
         DB::commit();
         return redirect('user/order/complete')->with('msg_success', '注文を完了しました');
     }
@@ -157,6 +157,7 @@ class OrderController extends Controller
         $user = \Auth::user();
         $orders = Order::whereUserId($user->id)->get()
                   ->sortByDesc('created_at');
+        // $orders = $user->orders->sortByDesc('created_at');
         return view('user.order.index', ['orders'=>$orders]);
     }
 

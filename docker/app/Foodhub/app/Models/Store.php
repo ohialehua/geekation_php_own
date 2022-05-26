@@ -17,8 +17,8 @@ class Store extends Authenticatable
      *
      * @var array<int, string>
      */
-    public function posts() { //1対多の「多」側なので複数形
-        return $this->hasMany('App\Models\Post');
+    public function store_posts() { //1対多の「多」側なので複数形
+        return $this->hasMany(StorePost::class);
     }
     public function items() {
         return $this->hasMany(Item::class);

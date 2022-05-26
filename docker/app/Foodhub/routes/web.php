@@ -106,4 +106,8 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::get('store_order/{id}',             'App\Http\Controllers\Store\StoreOrderController@show')->name('store.store_order.show');
     Route::post('store_order/{id}/edit',      'App\Http\Controllers\Store\StoreOrderController@update')->name('store.store_order.update');
     Route::post('order_item/edit/{id}',      'App\Http\Controllers\Store\OrderItemController@update')->name('store.order_item.update');
+    Route::get('post/new',                   'App\Http\Controllers\Store\StorePostController@new')->name('store.post.new');
+    Route::post('post/create',               'App\Http\Controllers\Store\StorePostController@create')->name('store.post.create');
+    Route::get('post/{id}',                   'App\Http\Controllers\Store\StorePostController@show')->name('store.post.show');
+    Route::post('post/{id}/delete',           'App\Http\Controllers\Store\StorePostController@destroy')->name('store.post.destroy');
 });

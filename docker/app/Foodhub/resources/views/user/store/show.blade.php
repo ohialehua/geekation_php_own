@@ -80,7 +80,7 @@
               @endforeach
             </td>
             <td>{{number_format($store_total + $postage)}}円</td>
-            <td><a href="/user/order/{{$store_order->order->id}}" class="text-dark">表示</a></td>
+            <td><a href="/user/order/{{$store_order->order->id}}" class="text-dark" title="この注文を見る">表示</a></td>
           </tr>
         @endforeach
         </tbody>

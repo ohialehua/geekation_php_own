@@ -40,12 +40,19 @@ class UserPostController extends Controller
     }
 
     public function show($id) {
+        $user = \Auth::user();
         $post = UserPost::find($id);
-        return view('user.post.show', ['post'=>$post]);
+        return view('user.post.show', ['post'=>$post, 'user'=>$user]);
     }
 
     public function destroy($id) {
-        $post = UserPost::find($id)->delete();
-        return redirect('home')->with('msg_warning', '投稿を削除しました');
+        $user = \Auth::user();
+        $post = UserPost::find($id);
+        if ($post->user_id == $user->id) {
+            $post->delete();
+            return redirect('home')->with('msg_warning', '投稿を削除しました');
+        } else {
+            return back()->with('msg_danger', '投稿の削除に失敗しました');
+        }
     }
 }

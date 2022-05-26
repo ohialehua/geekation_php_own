@@ -18,7 +18,8 @@
           </div>
         </div>
 
-          <div class="card-body">
+        <div class="card-body">
+          @if($user->id == $post->user_id)
             <div class="col offset-10">
               <form method="POST" action="{{ route('user.post.destroy', $post->id) }}">
               @csrf
@@ -27,6 +28,7 @@
                 </button>
               </form>
             </div>
+          @endif
 
             <div class="card" style="border-radius: 10%;">
             @if ($post->post_image_id === null)

@@ -113,7 +113,7 @@
         <h2>投稿一覧</h2>
       </div>
       <div class="col-3 d-inline-block">
-      <a href="/store/post/new" class="btn btn-sm btn-primary">新規投稿</a>
+        <a href="/store/post/new" class="btn btn-sm btn-primary">新規投稿</a>
       </div>
       <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
         @foreach ($posts as $post)
@@ -123,12 +123,12 @@
             @if ($post->post_image_id === null)
               <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
             @else
-              <img src="{{ asset('storage/post_images/'.$post->post_image_id) }}" width="100%" height="244px" style="border-radius: 10% 10% 0% 0%;">
+              <img src="{{ asset('storage/store_post_images/'.$post->post_image_id) }}" width="100%" height="244px" style="border-radius: 10% 10% 0% 0%;">
             @endif
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 mx-auto">
-                    <p class="card-text"> 説明：{{$post->body}}</p>
+                    <p class="card-text"> 説明：{{ Str::limit($post->body, 13, '...続きを読む') }}</p>
                   </div>
                 </div>
               </div>

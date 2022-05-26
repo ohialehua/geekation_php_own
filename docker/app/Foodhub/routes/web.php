@@ -54,6 +54,10 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('user/order/complete',                  'App\Http\Controllers\Auth\OrderController@complete')->name('user.order.complete');
     Route::get('user/order/index',                  'App\Http\Controllers\Auth\OrderController@index')->name('user.order.index');
     Route::get('user/order/{id}',                  'App\Http\Controllers\Auth\OrderController@show')->name('user.order.show');
+    Route::get('user/post/new',                   'App\Http\Controllers\Auth\UserPostController@new')->name('user.post.new');
+    Route::post('user/post/create',               'App\Http\Controllers\Auth\UserPostController@create')->name('user.post.create');
+    Route::get('user/post/{id}',                   'App\Http\Controllers\Auth\UserPostController@show')->name('user.post.show');
+    Route::post('user/post/{id}/delete',           'App\Http\Controllers\Auth\UserPostController@destroy')->name('user.post.destroy');
 });
 
 /*

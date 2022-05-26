@@ -26,7 +26,7 @@ class StorePostController extends Controller
                 $image = $request->file('post_image_id');
                 if ($image) {
                   $file_name  = $store->id . "." . $post->id . "." . $image->clientExtension();
-                  $path = $image->storeAs('public/post_images', $file_name);
+                  $path = $image->storeAs('public/store_post_images', $file_name);
                   $post->post_image_id = basename($path);
                   $post->save();
                 }
@@ -34,7 +34,7 @@ class StorePostController extends Controller
             unset($post['_token']);
             //保存
         } catch (\Exception $e) {
-            return back()->with('msg-danger', '商品登録に失敗しました');
+            return back()->with('msg_danger', '新規投稿に失敗しました');
         }
             //リダイレクト
             return redirect('store/home')->with('msg_success', '新規投稿しました');

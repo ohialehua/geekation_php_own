@@ -32,7 +32,7 @@
             @if ($post->post_image_id === null)
               <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
             @else
-              <img src="{{ asset('storage/post_images/'.$post->post_image_id) }}" width="100%" style="border-radius: 10%;">
+              <img src="{{ asset('storage/store_post_images/'.$post->post_image_id) }}" width="100%" style="border-radius: 10%;">
             @endif
             </div>
 

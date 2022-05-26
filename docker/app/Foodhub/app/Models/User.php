@@ -17,6 +17,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function user_posts() {
+        return $this->hasMany(UserPost::class);
+    }
     public function deliveries() {
         return $this->hasMany(Delivery::class);
     }

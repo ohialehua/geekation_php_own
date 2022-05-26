@@ -117,7 +117,7 @@
       <h2>投稿一覧</h2>
       <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
         @foreach ($posts as $post)
-        <a href="post/{{$post->id}}" class="text-dark">
+        <a href="/user/store_post/{{$post->id}}" class="text-dark">
           <div class="col">
             <div class="card mx-auto mt-4 shadow-lg text-center" style="border-radius: 10%;">
             @if ($post->post_image_id === null)

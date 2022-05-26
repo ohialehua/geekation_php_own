@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/post/create',               'App\Http\Controllers\Auth\UserPostController@create')->name('user.post.create');
     Route::get('user/post/{id}',                   'App\Http\Controllers\Auth\UserPostController@show')->name('user.post.show');
     Route::post('user/post/{id}/delete',           'App\Http\Controllers\Auth\UserPostController@destroy')->name('user.post.destroy');
+    Route::get('user/store_post/{id}',                   'App\Http\Controllers\Auth\StorePostController@show')->name('user.store_post.show');
 });
 
 /*

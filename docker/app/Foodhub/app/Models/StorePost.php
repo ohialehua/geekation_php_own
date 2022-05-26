@@ -12,10 +12,13 @@ class StorePost extends Model
     public function store() {
         return $this->belongsTo(Store::class);
     }
+    public function post_comments() {
+        return $this->hasMany(PostComment::class);
+    }
 
     protected $fillable = [
         'store_id',
-        'post_image_id',
+        'post_image',
         'body',
     ];
 }

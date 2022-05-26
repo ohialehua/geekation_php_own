@@ -34,12 +34,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="profile_image_id" class="col-md-4 col-form-label text-md-end text-center">{{ __('プロフィール画像') }}</label>
+                            <label for="profile_image" class="col-md-4 col-form-label text-md-end text-center">{{ __('プロフィール画像') }}</label>
 
                             <div class="col-md-6 text-center">
-                              <input id="profile_image_id" type="file" class="form-control" name="profile_image_id" value="{{ $user->profile_image_id }}" accept="image/png, image/jpeg" onchange="previewImage(this);">
-                            @if ($user->profile_image_id)
-                              <img src="{{ asset('storage/user_profiles/'.$user->profile_image_id) }}" id="img" width="50%" class="mt-4">
+                              <input id="profile_image" type="file" class="form-control" name="profile_image" value="{{ $user->profile_image }}" accept="image/png, image/jpeg" onchange="previewImage(this);">
+                            @if ($user->profile_image)
+                              <img src="{{ asset('storage/user_profiles/'.$user->profile_image) }}" id="img" width="50%" class="mt-4">
                             @else
                               <img src="{{ asset('storage/no_image.png') }}" id="img" width="50%" class="mt-4">
                             @endif

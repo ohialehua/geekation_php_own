@@ -52,12 +52,12 @@ class UserController extends Controller
         $user->fill($params)->save();
 
         // アップロードされたファイル
-        $profileImage = $request->file('profile_image_id');
+        $profileImage = $request->file('profile_image');
         if ($profileImage) {
             $file_name  = $user->id . "." . $profileImage->clientExtension();
             $path = $profileImage->storeAs('public/user_profiles', $file_name);
             // profile_imageカラムにファイル名をを保存
-            $user->profile_image_id = basename($path);
+            $user->profile_image = basename($path);
             $user->save();
         }
     } catch (\Exception $e) {

@@ -9,6 +9,21 @@ use App\Models\Store;
 
 class StorePostController extends Controller
 {
+       /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:store');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function new()
     {
         return view('store.post.new');
@@ -23,11 +38,11 @@ class StorePostController extends Controller
                 $post->store_id = $store->id;
                 $post->save();
 
-                $image = $request->file('post_image_id');
+                $image = $request->file('post_image');
                 if ($image) {
                   $file_name  = $store->id . "." . $post->id . "." . $image->clientExtension();
                   $path = $image->storeAs('public/store_post_images', $file_name);
-                  $post->post_image_id = basename($path);
+                  $post->post_image = basename($path);
                   $post->save();
                 }
             // 不要な「_token」の削除

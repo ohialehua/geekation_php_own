@@ -12,10 +12,10 @@
             @csrf
 
             <div class="row mb-3">
-              <label for="post_image_id" class="col-md-4 col-form-label text-md-end text-center">{{ __('投稿画像') }}</label>
+              <label for="post_image" class="col-md-4 col-form-label text-md-end text-center">{{ __('投稿画像') }}</label>
 
               <div class="col-md-6 text-center">
-                <input id="post_image_id" type="file" class="form-control" name="post_image_id" accept="image/png, image/jpeg" required autocomplete="post_image_id" onchange="previewImage(this);">
+                <input id="post_image" type="file" class="form-control" name="post_image" accept="image/png, image/jpeg" required autocomplete="post_image" onchange="previewImage(this);">
                 <img src="{{asset('storage/no_image.png')}}" id="img" width="50%" class="mt-4">
               </div>
             </div>

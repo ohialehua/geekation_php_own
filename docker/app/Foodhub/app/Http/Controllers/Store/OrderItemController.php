@@ -12,6 +12,21 @@ use App\Models\Item;
 
 class OrderItemController extends Controller
 {
+       /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:store');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function update(Request $request) {
         $order_item = OrderItem::find($request->id);
         $store_order = $order_item->store_order;

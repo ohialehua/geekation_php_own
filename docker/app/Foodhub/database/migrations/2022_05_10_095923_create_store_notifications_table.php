@@ -17,8 +17,8 @@ class CreateStoreNotificationsTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('user_id')->nullable(false);
             $table->integer('store_id')->nullable(false);
-            $table->integer('store_order_id');
-            $table->integer('post_comment_id');
+            $table->integer('store_order_id')->nullable(true);
+            $table->integer('post_comment_id')->nullable(true);
             $table->string('action')->nullable(false);
             $table->boolean('checked')->default(false);
             $table->timestamps();

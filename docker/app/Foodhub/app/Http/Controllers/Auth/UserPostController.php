@@ -8,6 +8,21 @@ use App\Models\UserPost;
 
 class UserPostController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:user');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function new()
     {
         return view('user.post.new');
@@ -22,11 +37,11 @@ class UserPostController extends Controller
                 $post->user_id = $user->id;
                 $post->save();
 
-                $image = $request->file('post_image_id');
+                $image = $request->file('post_image');
                 if ($image) {
                   $file_name  = $user->id . "." . $post->id . "." . $image->clientExtension();
                   $path = $image->storeAs('public/user_post_images', $file_name);
-                  $post->post_image_id = basename($path);
+                  $post->post_image = basename($path);
                   $post->save();
                 }
             // 不要な「_token」の削除

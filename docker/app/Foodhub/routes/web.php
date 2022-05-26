@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('user/post/{id}',                   'App\Http\Controllers\Auth\UserPostController@show')->name('user.post.show');
     Route::post('user/post/{id}/delete',           'App\Http\Controllers\Auth\UserPostController@destroy')->name('user.post.destroy');
     Route::get('user/store_post/{id}',                   'App\Http\Controllers\Auth\StorePostController@show')->name('user.store_post.show');
+    Route::post('user/post_comment/create',               'App\Http\Controllers\Auth\PostCommentController@create')->name('user.post_comment.create');
+    Route::post('user/post_comment/{id}/delete',           'App\Http\Controllers\Auth\PostCommentController@destroy')->name('user.post_comment.destroy');
 });
 
 /*

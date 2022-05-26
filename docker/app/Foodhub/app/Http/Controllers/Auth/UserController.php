@@ -32,7 +32,8 @@ class UserController extends Controller
 
     public function show($id) {
         $user = User::find($id);
-        return view('user.show', ['user'=>$user ]);
+        $posts = $user->user_posts;
+        return view('user.show', ['user'=>$user, 'posts'=>$posts ]);
     }
 
     public function edit() {

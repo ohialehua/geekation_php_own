@@ -29,26 +29,28 @@
       <div class="col-8 d-inline-block">
         <h2>投稿一覧</h2>
       </div>
-      <div class="card-deck py-5 row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+        @foreach ($posts as $post)
+        <a href="/user/post/{{$post->id}}" class="text-dark">
           <div class="col">
-            <div class="card mx-auto mt-4 shadow-lg">
-              画像
+            <div class="card mx-auto mt-4 shadow-lg text-center" style="border-radius: 10%;">
+            @if ($post->post_image_id === null)
+              <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
+            @else
+              <img src="{{ asset('storage/user_post_images/'.$post->post_image_id) }}" width="100%" height="244px" style="border-radius: 10% 10% 0% 0%;">
+            @endif
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 mx-auto">
-                    <p class="card-text">説明：</p>
-                    <div class="d-inline-flex">
-                      <span><i class="fas fa-utensils"></i> {{$user->name}} ｜ </span>
-                      <p><i class="fas fa-comment"> コメント数</i></p>
-                      <p class="text-danger ml-3"><i class="fas fa-heart"> いいね数</i></p>
-                      <p class="ml-2"><i class="fas fa-eye"> 閲覧数</i></p>
-                    </div>
+                    <p class="card-text"> 説明：{{ Str::limit($post->body, 13, '...続きを読む') }}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </a>
+        @endforeach
+      </div>
     </div>
   </div>
 </div>

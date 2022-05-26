@@ -55,14 +55,50 @@
             {{ __('コメント') }}
           </div>
           <div class="card-body">
-            <div class="row">
-              <div class="col-2">
-                <p class="card-text">sss</p>
-              </div>
-              <div class="col-10 border" style="border-radius: 10px;">
-                <p class="card-text"> ppp</p>
-              </div>
-            </div>
+            @foreach ($post_comments as $post_comment)
+              @if ($post_comment->user->id == $user->id)
+                <div class="row my-2">
+                  <div class="col-1 my-auto">
+                    <form method="POST" action="{{ route('user.post_comment.destroy', $post_comment->id) }}">
+                    @csrf
+                      <button type="submit" class="btn btn-sm btn-danger" title="削除ボタン" style="border-radius: 50%;">
+                        {{ __('×') }}
+                      </button>
+                    </form>
+                  </div>
+                  <div class="col-9 border" style="border-radius: 10px;">
+                    <p class="card-text">{{$post_comment->comment}}</p>
+                  </div>
+                  <div class="col-2">
+                    <div class="card" style="border-radius: 50%;">
+                      @if ($user->profile_image)
+                        <img src="{{ asset('storage/user_profiles/'.$user->profile_image) }}" width="100%" style="border-radius: 50%;">
+                      @else
+                        <img src="/storage/no_image.png" width="100%" style="border-radius: 50%;">
+                      @endif
+                    </div>
+                  </div>
+                </div>
+              @else
+                <div class="row my-2">
+                  <label>{{$post_comment->user->name}}</label>
+                  <div class="col-2">
+                    <a href="/user/{{$post_comment->user->id}}" title="{{$post_comment->user->name}}のページを見る">
+                      <div class="card" style="border-radius: 50%;">
+                      @if ($post_comment->user->profile_image)
+                        <img src="{{ asset('storage/user_profiles/'.$post_comment->user->profile_image) }}" width="100%" style="border-radius: 50%;">
+                      @else
+                        <img src="/storage/no_image.png" width="100%" style="border-radius: 50%;">
+                      @endif
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-9 border" style="border-radius: 10px;">
+                    <p class="card-text">{{$post_comment->comment}}</p>
+                  </div>
+                </div>
+              @endif
+            @endforeach
             <div class="mt-4">
               <form method="POST" action="{{ route('user.post_comment.create')}} ">
               @csrf

@@ -57,7 +57,8 @@ class UserPostController extends Controller
     public function show($id) {
         $user = \Auth::user();
         $post = UserPost::find($id);
-        return view('user.post.show', ['post'=>$post, 'user'=>$user]);
+        $post_comments = $post->post_comments;
+        return view('user.post.show', ['post'=>$post, 'user'=>$user, 'post_comments'=>$post_comments]);
     }
 
     public function destroy($id) {

@@ -19,8 +19,30 @@
         </div>
 
         <div class="card-body">
+          <div class="row">
+            <div class="col-2 offset-4">
+            @if ($post->isFavoritedBy(Auth::user()))
+              <form method="POST" action="{{ route('user.favorite.destroy', $post->id ) }}">
+              @csrf
+                <span class="favorites" title="いいねをはずす">
+                  <button type="submit" class="bg-white" style="border: none;"><h3 class="text-danger"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h3></button>
+                </span>
+              </form>
+            @else
+              <form method="POST" action="{{ route('user.favorite.create') }}">
+              @csrf
+                <span class="favorites" title="いいねする">
+                  <input id="user_post_id" name="user_post_id" type="hidden" value="{{$post->id}}">
+                  <button type="submit" class="bg-white" style="border: none;"><h3 class="text-dark"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h3></button>
+                </span>
+              </form>
+            @endif
+            </div>
+            <div class="col-2">
+              <h3><i class="fa fa-comments">{{$post_comments->count()}}</i></h3>
+            </div>
           @if($user->id == $post->user_id)
-            <div class="col offset-10">
+            <div class="col-2 offset-2">
               <form method="POST" action="{{ route('user.post.destroy', $post->id) }}">
               @csrf
                 <button type="submit" class="btn btn-sm btn-danger mb-2" onclick="return confirm('本当に削除しますか？')">
@@ -29,6 +51,7 @@
               </form>
             </div>
           @endif
+          </div>
 
             <div class="card" style="border-radius: 10%;">
             @if ($post->post_image === null)

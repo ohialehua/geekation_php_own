@@ -41,8 +41,14 @@
             @endif
               <div class="card-body">
                 <div class="row">
-                  <div class="col-12 mx-auto">
-                    <p class="card-text"> 説明：{{ Str::limit($post->body, 13, '...続きを読む') }}</p>
+                  <div class="col-8">
+                    <p class="card-text"> 説明：{{ Str::limit($post->body, 10, '...') }}</p>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-danger"><i class="fas fa-heart">{{$post->favorites->count()}}</i></p>
+                  </div>
+                  <div class="col-1 offset-1">
+                    <p><i class="fa fa-comments">{{$post->post_comments->count()}}</i></p>
                   </div>
                 </div>
               </div>

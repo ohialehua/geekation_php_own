@@ -18,8 +18,15 @@
           </div>
         </div>
 
-          <div class="card-body">
-            <div class="col offset-10">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2 offset-4">
+              <h3 class="text-danger" title="いいね数"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h3>
+            </div>
+            <div class="col-2">
+              <h3 title="コメント数"><i class="fa fa-comments">{{$post_comments->count()}}</i></h3>
+            </div>
+            <div class="col-2 offset-2">
               <form method="POST" action="{{ route('store.post.destroy', $post->id) }}">
               @csrf
                 <button type="submit" class="btn btn-sm btn-danger mb-2" onclick="return confirm('本当に削除しますか？')">
@@ -27,6 +34,7 @@
                 </button>
               </form>
             </div>
+          </div>
 
             <div class="card" style="border-radius: 10%;">
             @if ($post->post_image === null)
@@ -37,7 +45,7 @@
             </div>
 
             <div class="row mb-3">
-              <label for="body" class="col-md-4 col-form-label text-md-end">{{ __('紹介文') }}</label>
+              <label for="body" class="text-center col-form-label mt-2">{{ __('紹介文') }}</label>
 
               <div class="card-body border" style="border-radius: 10px;">
                 {{$post->body}}

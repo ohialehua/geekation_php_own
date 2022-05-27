@@ -29,7 +29,7 @@ class StoreOrderController extends Controller
      */
     public function index() {
         $store = \Auth::user();
-        $store_orders = $store->store_orders->sortByDesc('created_at');;
+        $store_orders = $store->store_orders->sortByDesc('created_at');
         return view('store.store_order.index', ['store_orders'=>$store_orders]);
     }
 

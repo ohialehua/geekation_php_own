@@ -123,4 +123,5 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::post('post/{id}/delete',           'App\Http\Controllers\Store\StorePostController@destroy')->name('store.post.destroy');
     Route::post('post_comment/create',         'App\Http\Controllers\Store\PostCommentController@create')->name('store.post_comment.create');
     Route::post('post_comment/{id}/delete',     'App\Http\Controllers\Store\PostCommentController@destroy')->name('store.post_comment.destroy');
+    Route::get('marker/index',                   'App\Http\Controllers\Store\MarkerController@index')->name('store.marker.index');
 });

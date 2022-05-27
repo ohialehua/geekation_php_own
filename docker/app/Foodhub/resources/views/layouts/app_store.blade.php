@@ -66,7 +66,7 @@
                                         {{ __('Mypage') }}
                                     </a>
 
-                                    <a class="dropdown-item" href="{{ route('store.home') }}">
+                                    <a class="dropdown-item" href="{{ route('store.marker.index') }}">
                                         {{ __('Customers') }}
                                     </a>
 

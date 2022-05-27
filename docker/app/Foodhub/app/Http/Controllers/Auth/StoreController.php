@@ -27,8 +27,10 @@ class StoreController extends Controller
      */
 
     public function index() {
+        $user = \Auth::user();
         $stores = Store::all();
-        return view('user.store.index', ['stores'=>$stores]);
+        $markers = $user->markers;
+        return view('user.store.index', ['stores'=>$stores, 'markers'=>$markers]);
     }
 
     public function show($id) {

@@ -21,21 +21,27 @@
   <div class="row mt-3">
     <div class="col-lg-5">
       <h2>{{$store->name}}詳細</h2>
-      <div class="col-3 d-inline-block">
-      @if ($store->profile_image === null)
-        <img src="/storage/no_image.png" width="100" height="100" >
-      @else
-        <img src="{{ asset('storage/store_profiles/'.$store->profile_image) }}" width="100" height="100">
-      @endif
+      <div class="row">
+        <div class="col-3 d-inline-block">
+        @if ($store->profile_image === null)
+          <img src="/storage/no_image.png" width="100" height="100" >
+        @else
+          <img src="{{ asset('storage/store_profiles/'.$store->profile_image) }}" width="100" height="100">
+        @endif
+        </div>
+        <div class="col-4 d-inline-block">
+          <ul>
+            <a href="edit" class="btn btn-sm btn-secondary mb-2">編集</a>
+            <a href="unsubscribe" class="btn btn-sm btn-danger mb-2">退会</a>
+            <a href="store_order/index" class="btn btn-sm btn-primary">注文履歴一覧</a>
+          </ul>
+        </div>
+        <div class="col-2 offset-3">
+          <h1 class="text-warning" title="フォロワー数">
+            <i class="fa fa-star">{{$store->markers->count()}}</i>
+          </h1>
+        </div>
       </div>
-      <div class="col-4 d-inline-block">
-        <ul>
-          <a href="edit" class="btn btn-sm btn-secondary mb-2">編集</a>
-          <a href="unsubscribe" class="btn btn-sm btn-danger mb-2">退会</a>
-          <a href="store_order/index" class="btn btn-sm btn-primary">注文履歴一覧</a>
-        </ul>
-      </div>
-      <div class="col text-right"><a>フォロワー数：○○</a></div>
       <table class="table table-light border">
         <tr>
           <td>店舗名</td>
@@ -115,7 +121,7 @@
       <div class="col-3 d-inline-block">
         <a href="/store/post/new" class="btn btn-sm btn-primary">新規投稿</a>
       </div>
-      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-5 row-eq-height">
         @foreach ($posts as $post)
         <a href="post/{{$post->id}}" class="text-dark">
           <div class="col">
@@ -127,8 +133,14 @@
             @endif
               <div class="card-body">
                 <div class="row">
-                  <div class="col-12 mx-auto">
-                    <p class="card-text"> 説明：{{ Str::limit($post->body, 13, '...続きを読む') }}</p>
+                  <div class="col-7">
+                    <p class="card-text">{{ Str::limit($post->body, 12, '...') }}</p>
+                  </div>
+                  <div class="col-1">
+                    <h5 class="text-danger" title="いいね数"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h5>
+                  </div>
+                  <div class="col-1 offset-1">
+                    <h5><i class="fa fa-comments" title="コメント数">{{$post->post_comments->count()}}</i></h5>
                   </div>
                 </div>
               </div>

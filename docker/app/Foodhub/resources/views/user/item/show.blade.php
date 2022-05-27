@@ -24,6 +24,7 @@
               <td>店舗名：<span title="{{$item->store->name}}の詳細ページへ移動する"><a href="/user/store/{{$item->store->id}}" class="text-dark">{{$item->store->name}}</a></span></td>
               <td>商品名：{{$item->name}}</td>
               <td>税抜き価格：<p class="d-inline-block" style="background: linear-gradient(transparent 70%, #ffff66 0%);">{{number_format($item->price_before_tax)}}円</p></td>
+              <td><h5 class="text-success" title="累計購入数"><i class="fa fa-gifts">{{$item->sales_figures}}</i></h5></td>
             </tr>
           </table>
           <p class="text-center">紹介文</p>

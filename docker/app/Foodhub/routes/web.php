@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/post_comment/{id}/delete',           'App\Http\Controllers\Auth\PostCommentController@destroy')->name('user.post_comment.destroy');
     Route::post('user/favorite/create',               'App\Http\Controllers\Auth\FavoriteController@create')->name('user.favorite.create');
     Route::post('user/favorite/{id}/delete',           'App\Http\Controllers\Auth\FavoriteController@destroy')->name('user.favorite.destroy');
+    Route::post('user/marker/create',               'App\Http\Controllers\Auth\MarkerController@create')->name('user.marker.create');
+    Route::post('user/marker/{id}/delete',           'App\Http\Controllers\Auth\MarkerController@destroy')->name('user.marker.destroy');
 });
 
 /*
@@ -121,4 +123,5 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::post('post/{id}/delete',           'App\Http\Controllers\Store\StorePostController@destroy')->name('store.post.destroy');
     Route::post('post_comment/create',         'App\Http\Controllers\Store\PostCommentController@create')->name('store.post_comment.create');
     Route::post('post_comment/{id}/delete',     'App\Http\Controllers\Store\PostCommentController@destroy')->name('store.post_comment.destroy');
+    Route::get('marker/index',                   'App\Http\Controllers\Store\MarkerController@index')->name('store.marker.index');
 });

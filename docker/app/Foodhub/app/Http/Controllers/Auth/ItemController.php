@@ -27,8 +27,10 @@ class ItemController extends Controller
      */
 
     public function index() {
+        $user = \Auth::user();
         $items = Item::all();
-        return view('user.item.index', ['items'=>$items]);
+        $markers = $user->markers;
+        return view('user.item.index', ['items'=>$items, 'markers'=>$markers]);
     }
 
     public function show($id) {

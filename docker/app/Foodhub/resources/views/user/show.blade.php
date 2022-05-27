@@ -29,9 +29,9 @@
       <div class="col-8 d-inline-block">
         <h2>投稿一覧</h2>
       </div>
-      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="card-deck row row-cols-2 row-cols-md-3 row-eq-height">
         @foreach ($posts as $post)
-        <a href="/user/post/{{$post->id}}" class="text-dark">
+        <a href="/user/post/{{$post->id}}" class="text-dark" title="この投稿を見る">
           <div class="col">
             <div class="card mx-auto mt-4 shadow-lg text-center" style="border-radius: 10%;">
             @if ($post->post_image === null)
@@ -41,14 +41,14 @@
             @endif
               <div class="card-body">
                 <div class="row">
-                  <div class="col-8">
-                    <p class="card-text"> 説明：{{ Str::limit($post->body, 10, '...') }}</p>
+                  <div class="col-7">
+                    <p class="card-text">{{ Str::limit($post->body, 12, '...') }}</p>
                   </div>
                   <div class="col-1">
-                    <p class="text-danger"><i class="fas fa-heart">{{$post->favorites->count()}}</i></p>
+                    <h5 class="text-danger" title="いいね数"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h5>
                   </div>
                   <div class="col-1 offset-1">
-                    <p><i class="fa fa-comments">{{$post->post_comments->count()}}</i></p>
+                    <h5><i class="fa fa-comments" title="コメント数">{{$post->post_comments->count()}}</i></h5>
                   </div>
                 </div>
               </div>

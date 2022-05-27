@@ -120,10 +120,10 @@
         <a href="/user/store_post/{{$post->id}}" class="text-dark">
           <div class="col">
             <div class="card mx-auto mt-4 shadow-lg text-center" style="border-radius: 10%;">
-            @if ($post->post_image_id === null)
+            @if ($post->post_image === null)
               <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
             @else
-              <img src="{{ asset('storage/store_post_images/'.$post->post_image_id) }}" width="100%" height="244px" style="border-radius: 10% 10% 0% 0%;">
+              <img src="{{ asset('storage/store_post_images/'.$post->post_image) }}" width="100%" height="244px" style="border-radius: 10% 10% 0% 0%;">
             @endif
               <div class="card-body">
                 <div class="row">

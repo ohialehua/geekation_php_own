@@ -56,8 +56,10 @@ class StorePostController extends Controller
     }
 
     public function show($id) {
+        $store = \Auth::user();
         $post = StorePost::find($id);
-        return view('store.post.show', ['post'=>$post]);
+        $post_comments = $post->post_comments;
+        return view('store.post.show', ['store'=>$store, 'post'=>$post, 'post_comments'=>$post_comments]);
     }
 
     public function destroy($id) {

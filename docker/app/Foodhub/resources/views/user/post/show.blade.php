@@ -66,8 +66,8 @@
                       </button>
                     </form>
                   </div>
-                  <div class="col-9 border" style="border-radius: 10px;">
-                    <p class="card-text">{{$post_comment->comment}}</p>
+                  <div class="col-9 border my-auto text-center" style="border-radius: 10px;">
+                    <p class="card-text my-1">{{$post_comment->comment}}</p>
                   </div>
                   <div class="col-2">
                     <div class="card" style="border-radius: 50%;">
@@ -77,6 +77,9 @@
                         <img src="/storage/no_image.png" width="100%" style="border-radius: 50%;">
                       @endif
                     </div>
+                  </div>
+                  <div class="col-4 offset-8">
+                    <p>{{date('y/n/d g:i a', strtotime($post_comment->created_at))}}</p>
                   </div>
                 </div>
               @else
@@ -93,9 +96,10 @@
                       </div>
                     </a>
                   </div>
-                  <div class="col-9 border" style="border-radius: 10px;">
-                    <p class="card-text">{{$post_comment->comment}}</p>
+                  <div class="col-9 border my-auto text-center" style="border-radius: 10px;">
+                    <p class="card-text my-1">{{$post_comment->comment}}</p>
                   </div>
+                  <p>{{date('y/n/d g:i a', strtotime($post_comment->created_at))}}</p>
                 </div>
               @endif
             @endforeach

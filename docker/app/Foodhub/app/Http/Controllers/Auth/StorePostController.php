@@ -24,7 +24,9 @@ class StorePostController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function show($id) {
+        $user = \Auth::user();
         $post = StorePost::find($id);
-        return view('user.store_post.show', ['post'=>$post]);
+        $post_comments = $post->post_comments;
+        return view('user.store_post.show', ['user'=>$user, 'post'=>$post, 'post_comments'=>$post_comments]);
     }
 }

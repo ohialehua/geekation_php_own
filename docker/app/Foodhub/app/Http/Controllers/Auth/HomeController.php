@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\UserPost;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,8 @@ class HomeController extends Controller
     public function show()
     {
         $user = \Auth::user();
-        return view('home', ['user'=>$user]);
+        $posts = $user->user_posts
+               ->sortByDesc('created_at');;
+        return view('home', ['user'=>$user, 'posts'=>$posts]);
     }
 }

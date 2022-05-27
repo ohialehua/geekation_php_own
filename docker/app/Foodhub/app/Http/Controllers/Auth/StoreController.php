@@ -32,9 +32,22 @@ class StoreController extends Controller
     }
 
     public function show($id) {
+        $postage = 200;
+        $user = \Auth::user();
         $store = Store::find($id);
-        $items = Store::find($store->id)->items
+        $items = $store->items
                 ->sortByDesc('created_at');
-        return view('user.store.show', ['store'=>$store, 'items'=>$items]);
+        $posts = $store->store_posts
+                ->sortByDesc('created_at');
+        $store_orders = $store->store_orders->where('user_id', $user->id)
+                ->sortByDesc('created_at');
+        return view('user.store.show',
+                   [
+                    'postage'=>$postage,
+                    'store'=>$store,
+                    'items'=>$items,
+                    'posts'=>$posts,
+                    'store_orders'=>$store_orders
+                   ]);
     }
 }

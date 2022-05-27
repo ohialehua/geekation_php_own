@@ -17,6 +17,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function user_posts() {
+        return $this->hasMany(UserPost::class);
+    }
+    public function post_comments() {
+        return $this->hasMany(PostComment::class);
+    }
     public function deliveries() {
         return $this->hasMany(Delivery::class);
     }
@@ -33,7 +39,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'introduction',
-        'profile_image_id',
+        'profile_image',
         'email',
         'full_name',
         'full_name_kana',

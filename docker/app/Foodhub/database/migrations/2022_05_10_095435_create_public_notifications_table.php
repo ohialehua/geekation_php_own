@@ -15,12 +15,12 @@ class CreatePublicNotificationsTable extends Migration
     {
         Schema::create('public_notifications', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('sender_id');
-            $table->integer('receiver_id');
-            $table->integer('user_id');
-            $table->integer('store_id');
-            $table->integer('store_order_id');
-            $table->integer('post_comment_id');
+            $table->integer('sender_id')->nullable(true);
+            $table->integer('receiver_id')->nullable(true);
+            $table->integer('user_id')->nullable(true);
+            $table->integer('store_id')->nullable(true);
+            $table->integer('store_order_id')->nullable(true);
+            $table->integer('post_comment_id')->nullable(true);
             $table->string('action')->nullable(false);
             $table->boolean('checked')->default(false);
             $table->timestamps();

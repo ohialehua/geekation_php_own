@@ -16,10 +16,10 @@
       @foreach ($users as $user)
         <tr>
           <td>
-          @if ($user->profile_image_id === null)
+          @if ($user->profile_image === null)
             <img src="/storage/no_image.png" width="50" height="50" >
           @else
-            <img src="{{ asset('storage/user_profiles/'.$user->profile_image_id) }}" width="50" height="50">
+            <img src="{{ asset('storage/user_profiles/'.$user->profile_image) }}" width="50" height="50">
           @endif
           </td>
           <td><a href="{{$user->id}}" class="text-dark">{{$user->name}}</a></td>

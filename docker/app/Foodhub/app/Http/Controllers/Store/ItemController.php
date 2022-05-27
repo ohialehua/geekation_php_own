@@ -79,5 +79,6 @@ class ItemController extends Controller
 
     public function destroy($id) {
         $item = Item::find($id)->delete();
-        return redirect('store/home')->with('msg_warning', '商品を削除しました');    }
+        return redirect('store/home')->with('msg_warning', '商品を削除しました');
+    }
 }

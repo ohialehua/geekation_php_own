@@ -54,6 +54,15 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::get('user/order/complete',                  'App\Http\Controllers\Auth\OrderController@complete')->name('user.order.complete');
     Route::get('user/order/index',                  'App\Http\Controllers\Auth\OrderController@index')->name('user.order.index');
     Route::get('user/order/{id}',                  'App\Http\Controllers\Auth\OrderController@show')->name('user.order.show');
+    Route::get('user/post/new',                   'App\Http\Controllers\Auth\UserPostController@new')->name('user.post.new');
+    Route::post('user/post/create',               'App\Http\Controllers\Auth\UserPostController@create')->name('user.post.create');
+    Route::get('user/post/{id}',                   'App\Http\Controllers\Auth\UserPostController@show')->name('user.post.show');
+    Route::post('user/post/{id}/delete',           'App\Http\Controllers\Auth\UserPostController@destroy')->name('user.post.destroy');
+    Route::get('user/store_post/{id}',                   'App\Http\Controllers\Auth\StorePostController@show')->name('user.store_post.show');
+    Route::post('user/post_comment/create',               'App\Http\Controllers\Auth\PostCommentController@create')->name('user.post_comment.create');
+    Route::post('user/post_comment/{id}/delete',           'App\Http\Controllers\Auth\PostCommentController@destroy')->name('user.post_comment.destroy');
+    Route::post('user/favorite/create',               'App\Http\Controllers\Auth\FavoriteController@create')->name('user.favorite.create');
+    Route::post('user/favorite/{id}/delete',           'App\Http\Controllers\Auth\FavoriteController@destroy')->name('user.favorite.destroy');
 });
 
 /*
@@ -106,4 +115,10 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::get('store_order/{id}',             'App\Http\Controllers\Store\StoreOrderController@show')->name('store.store_order.show');
     Route::post('store_order/{id}/edit',      'App\Http\Controllers\Store\StoreOrderController@update')->name('store.store_order.update');
     Route::post('order_item/edit/{id}',      'App\Http\Controllers\Store\OrderItemController@update')->name('store.order_item.update');
+    Route::get('post/new',                   'App\Http\Controllers\Store\StorePostController@new')->name('store.post.new');
+    Route::post('post/create',               'App\Http\Controllers\Store\StorePostController@create')->name('store.post.create');
+    Route::get('post/{id}',                   'App\Http\Controllers\Store\StorePostController@show')->name('store.post.show');
+    Route::post('post/{id}/delete',           'App\Http\Controllers\Store\StorePostController@destroy')->name('store.post.destroy');
+    Route::post('post_comment/create',         'App\Http\Controllers\Store\PostCommentController@create')->name('store.post_comment.create');
+    Route::post('post_comment/{id}/delete',     'App\Http\Controllers\Store\PostCommentController@destroy')->name('store.post_comment.destroy');
 });

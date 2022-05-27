@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
 use App\Models\Item;
+use App\Models\StorePost;
 
 class HomeController extends Controller
 {
@@ -27,8 +28,10 @@ class HomeController extends Controller
     public function show(Store $store)
     {
         $store = \Auth::user();
-        $items = Store::find($store->id)->items
+        $items = $store->items
                 ->sortByDesc('created_at');
-        return view('store.home', ['store'=>$store, 'items'=>$items]);
+        $posts = $store->store_posts
+                ->sortByDesc('created_at');
+        return view('store.home', ['store'=>$store, 'items'=>$items, 'posts'=>$posts]);
     }
 }

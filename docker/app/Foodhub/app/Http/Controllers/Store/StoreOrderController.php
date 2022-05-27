@@ -12,6 +12,21 @@ use App\Models\Item;
 
 class StoreOrderController extends Controller
 {
+       /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:store');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function index() {
         $store = \Auth::user();
         $store_orders = $store->store_orders->sortByDesc('created_at');;

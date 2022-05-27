@@ -16,7 +16,7 @@ class CreateUserPostsTable extends Migration
         Schema::create('user_posts', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('user_id')->nullable(false);
-            $table->string('post_image_id')->nullable(false);
+            $table->string('post_image')->nullable(false);
             $table->text('body')->nullable(false);
             $table->timestamps();
         });

@@ -60,13 +60,29 @@
             <td>配送先</td>
             <td>注文商品</td>
             <td>支払金額</td>
+            <td>詳細</td>
           </tr>
+        @foreach ($store_orders as $store_order)
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{date('Y年m月d日', strtotime($store_order->order->created_at))}}</td>
+            <td>
+              〒{{$store_order->order->post_address}}<br>
+                {{$store_order->order->address}}<br>
+                {{$store_order->order->name}}
+            </td>
+            <td>
+            <?php $store_total = 0; ?>
+              @foreach ($store_order->order->order_items->where('store_order_id', $store_order->id) as $order_item)
+                <a href="/user/item/{{$order_item->item->id}}" class="text-dark" title='"{{$order_item->item->name}}"のページを見る'>
+                  {{$order_item->item->name}} ×{{$order_item->quantity}}
+                </a><br>
+                <?php $store_total += $order_item->price_after_tax * $order_item->quantity; ?>
+              @endforeach
+            </td>
+            <td>{{number_format($store_total + $postage)}}円</td>
+            <td><a href="/user/order/{{$store_order->order->id}}" class="text-dark" title="この注文を見る">表示</a></td>
           </tr>
+        @endforeach
         </tbody>
       </table>
     </div>
@@ -99,26 +115,34 @@
       </div>
 
       <h2>投稿一覧</h2>
-      <div class="card-deck row row-cols-2 row-cols-md-3 row-eq-height">
+      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+        @foreach ($posts as $post)
+        <a href="/user/store_post/{{$post->id}}" class="text-dark">
           <div class="col">
-            <div class="card mx-auto mt-4 shadow-lg">
-              画像
+            <div class="card mx-auto mt-4 shadow-lg text-center" style="border-radius: 10%;">
+            @if ($post->post_image === null)
+              <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
+            @else
+              <img src="{{ asset('storage/store_post_images/'.$post->post_image) }}" width="100%" height="244px" style="border-radius: 10% 10% 0% 0%;">
+            @endif
               <div class="card-body">
                 <div class="row">
-                  <div class="col-12 mx-auto">
-                    <p class="card-text">説明：</p>
-                    <div class="d-inline-flex">
-                      <span><i class="fas fa-utensils"></i> {{$store->name}} ｜ </span>
-                      <p><i class="fas fa-comment"> コメント数</i></p>
-                      <p class="text-danger ml-3"><i class="fas fa-heart"> いいね数</i></p>
-                      <p class="ml-2"><i class="fas fa-eye"> 閲覧数</i></p>
-                    </div>
+                  <div class="col-8">
+                    <p class="card-text"> 説明：{{ Str::limit($post->body, 10, '...') }}</p>
+                  </div>
+                  <div class="col-1">
+                    <p class="text-danger"><i class="fas fa-heart">{{$post->favorites->count()}}</i></p>
+                  </div>
+                  <div class="col-1 offset-1">
+                    <p><i class="fa fa-comments">{{$post->post_comments->count()}}</i></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </a>
+        @endforeach
+      </div>
     </div>
   </div>
 </div>

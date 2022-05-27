@@ -48,7 +48,7 @@
                   <img src="{{ asset('storage/store_profiles/'.$marker->store->profile_image) }}" width="50px" height="50px">
                 @endif
               </td>
-              <td><h5 class="mt-3">{{$marker->store->name}}</h5></td>
+              <td><a href="/user/store/{{$marker->store->id}}" class="text-dark"><h5 class="mt-3">{{$marker->store->name}}</h5></a></td>
             </tr>
           @endforeach
         </tbody>

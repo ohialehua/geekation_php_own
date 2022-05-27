@@ -17,12 +17,11 @@
             @endif
               <div class="card-body">
                 <div class="row">
-                  <div class="col-12 mx-auto">
-                    <p class="card-text"><i class="fas fa-utensils"></i> {{$store->name}}</p>
-                    <div class="d-inline-flex">
-                      <p class="ml-2"> フォロワー数：○○　｜ </p>
-                      <p>★</p>
-                    </div>
+                  <div class="col-9">
+                    <p class="card-text"><i class="fas fa-utensils"></i> {{ Str::limit($store->name, 15, '...') }}</p>
+                  </div>
+                  <div class="col-1">
+                    <h5 class="text-warning" title="フォロワー数"><i class="fa fa-star">{{$store->markers->count()}}</i></h5>
                   </div>
                 </div>
               </div>
@@ -36,10 +35,18 @@
       <table class="table table-light">
         <thead><h4 class="text-center">お気に入り店舗</h4></thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
+          @foreach ($markers as $marker)
+            <tr>
+              <td>
+                @if ($marker->store->profile_image === null)
+                  <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
+                @else
+                  <img src="{{ asset('storage/store_profiles/'.$marker->store->profile_image) }}" width="50px" height="50px">
+                @endif
+              </td>
+              <td><a href="/user/store/{{$marker->store->id}}" class="text-dark"><h5 class="mt-3">{{$marker->store->name}}</h5></a></td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

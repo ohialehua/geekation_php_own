@@ -29,6 +29,9 @@ class Store extends Authenticatable
     public function store_orders() {
         return $this->hasMany(StoreOrder::class);
     }
+    public function markers() {
+        return $this->hasMany(Marker::class);
+    }
 
     protected $fillable = [
         'name',
@@ -43,6 +46,10 @@ class Store extends Authenticatable
         'image_path',
         'is_deleted',
     ];
+
+    public function isMarkedBy($user): bool {
+        return Marker::where('user_id', $user->id)->where('store_id', $this->id)->first() !==null;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

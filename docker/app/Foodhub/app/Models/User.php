@@ -35,6 +35,9 @@ class User extends Authenticatable
     public function orders() {
         return $this->hasMany(Order::class);
     }
+    public function markers() {
+        return $this->hasMany(Marker::class);
+    }
 
     protected $fillable = [
         'name',

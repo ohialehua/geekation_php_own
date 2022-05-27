@@ -18,7 +18,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 mx-auto">
-                    <p class="card-text"><i class="fas fa-utensils"></i>{{$store->name}}</p>
+                    <p class="card-text"><i class="fas fa-utensils"></i> {{$store->name}}</p>
                     <div class="d-inline-flex">
                       <p class="ml-2"> フォロワー数：○○　｜ </p>
                       <p>★</p>

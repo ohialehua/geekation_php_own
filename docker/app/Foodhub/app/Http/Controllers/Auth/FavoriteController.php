@@ -39,11 +39,11 @@ class FavoriteController extends Controller
             return back()->with('msg_danger', 'いいねに失敗しました');
         }
             //リダイレクト
-            return back()->with('msg_success', 'いいねしました');
+            return back()->with('msg_info', 'いいねしました');
     }
 
     public function destroy(Request $request) {
         $user = \Auth::user();
-        $favorite = Favorite::where('user_id', $user->id)->where('user_post_id', $request->id)->delete();
-        return back()->with('msg_warning', 'いいねを削除しました');    }
+        $favorite = Favorite::where('user_id', $user->id)->where('user_post_id', $request->user_post_id)->delete();
+        return back()->with('msg_danger', 'いいねを削除しました');    }
 }

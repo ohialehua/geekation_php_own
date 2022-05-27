@@ -41,7 +41,8 @@
           @endif
         </div>
       </div>
-      <table class="table table-light border">
+
+      <table class="table table-light border mb-5">
         <tr>
           <td>店舗名</td>
           <td>{{$store->name}}</td>
@@ -80,6 +81,7 @@
           <td>{{$store->email}}</td>
         </tr>
       </table>
+
       <table class="table table-light border">
         <thead><h4 class="text-center">{{$store->name}}での購入履歴</h4></thead>
         <tbody>
@@ -133,7 +135,7 @@
                     <p class="card-text"><i class="fas fa-utensils"></i> {{$item->name}}</p>
                   </div>
                   <div class="col-8">
-                    <p class="card-text"> 説明：{{ Str::limit($item->body, 10, '...') }}</p>
+                    <p class="card-text"> 説明：{{ Str::limit($item->body, 8, '...') }}</p>
                   </div>
                   <div class="col-3">
                     <h5 class="text-success" title="累計購入数"><i class="fa fa-gifts">{{$item->sales_figures}}</i></h5>
@@ -147,7 +149,7 @@
       </div>
 
       <h2>投稿一覧</h2>
-      <div class="card-deck row row-cols-2 row-cols-md-3 row-cols-lg-4 row-eq-height">
+      <div class="card-deck row row-cols-2 row-cols-md-3 row-eq-height">
         @foreach ($posts as $post)
         <a href="/user/store_post/{{$post->id}}" class="text-dark" title="この投稿を見る">
           <div class="col">
@@ -159,14 +161,14 @@
             @endif
               <div class="card-body">
                 <div class="row">
-                  <div class="col-8">
-                    <p class="card-text"> 説明：{{ Str::limit($post->body, 10, '...') }}</p>
+                  <div class="col-7">
+                    <p class="card-text">{{ Str::limit($post->body, 12, '...') }}</p>
                   </div>
                   <div class="col-1">
-                    <p class="text-danger" title="いいね数"><i class="fas fa-heart">{{$post->favorites->count()}}</i></p>
+                    <h5 class="text-danger" title="いいね数"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h5>
                   </div>
                   <div class="col-1 offset-1">
-                    <p><i class="fa fa-comments" title="コメント数">{{$post->post_comments->count()}}</i></p>
+                    <h5><i class="fa fa-comments" title="コメント数">{{$post->post_comments->count()}}</i></h5>
                   </div>
                 </div>
               </div>

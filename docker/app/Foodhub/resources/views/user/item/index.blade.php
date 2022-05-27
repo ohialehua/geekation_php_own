@@ -18,10 +18,10 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 mx-auto my-2">
-                    <p class="card-text"><i class="fas fa-utensils"></i> {{ Str::limit("{$item->store->name}：{$item->name}", 30, '...') }}</p>
+                    <p class="card-text"><i class="fas fa-utensils"></i> {{ Str::limit("{$item->store->name}：{$item->name}", 23, '...') }}</p>
                   </div>
                   <div class="col-8">
-                    <p class="card-text"> 説明：{{ Str::limit($item->body, 10, '...') }}</p>
+                    <p class="card-text"> 説明：{{ Str::limit($item->body, 8, '...') }}</p>
                   </div>
                   <div class="col-3">
                     <h5 class="text-success" title="累計購入数"><i class="fa fa-gifts">{{$item->sales_figures}}</i></h5>
@@ -39,10 +39,18 @@
       <table class="table table-light">
         <thead><h4 class="text-center">お気に入り店舗</h4></thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-          </tr>
+          @foreach ($markers as $marker)
+            <tr>
+              <td>
+                @if ($marker->store->profile_image === null)
+                  <img src="/storage/no_image.png" width="100%" style="border-radius: 10% 10% 0% 0%;">
+                @else
+                  <img src="{{ asset('storage/store_profiles/'.$marker->store->profile_image) }}" width="50px" height="50px">
+                @endif
+              </td>
+              <td><h5 class="mt-3">{{$marker->store->name}}</h5></td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

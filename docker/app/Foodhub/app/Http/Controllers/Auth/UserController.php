@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Relationship;
 
 
 class UserController extends Controller
@@ -26,14 +27,30 @@ class UserController extends Controller
      */
 
     public function index() {
+        $user = \Auth::user();
         $users = User::all();
-        return view('user.index', ['users'=>$users]);
+        $following_users = Relationship::where('followed_id', $user->id)->get();
+        $follower_users = Relationship::where('follower_id', $user->id)->get();
+        return view('user.index',
+                   [
+                    'users'=>$users,
+                    'following_users'=>$following_users,
+                    'follower_users'=>$follower_users,
+                   ]);
     }
 
     public function show($id) {
         $user = User::find($id);
         $posts = $user->user_posts;
-        return view('user.show', ['user'=>$user, 'posts'=>$posts ]);
+        $following_count = Relationship::where('followed_id', $user->id)->count();
+        $follower_count = Relationship::where('follower_id', $user->id)->count();
+        return view('user.show',
+                   [
+                    'user'=>$user,
+                    'posts'=>$posts,
+                    'following_count'=>$following_count,
+                    'follower_count'=>$follower_count,
+                   ]);
     }
 
     public function edit() {

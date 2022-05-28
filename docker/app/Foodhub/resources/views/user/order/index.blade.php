@@ -32,7 +32,7 @@
                     </td>
                     <td>
                     @foreach ($order->store_orders as $store_order)
-                      <a href="{{$store_order->store->id}}" class="text-dark">{{$store_order->store->name}}</a>
+                      <a href="/user/store/{{$store_order->store->id}}" class="text-dark">{{$store_order->store->name}}</a>
                     <!-- 加盟店名と加盟店での注文商品の行を合わせる -->
                         @foreach ($store_order->order_items as $order_item)
                           <br>

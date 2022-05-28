@@ -5,14 +5,48 @@
   <div class="row mt-3">
     <div class="col-lg-5">
       <h2>{{$user->name}}詳細</h2>
-      <div class="col-3 d-inline-block">
+      <div class="col-3">
       @if ($user->profile_image === null)
         <img src="/storage/no_image.png" width="100" height="100" >
       @else
         <img src="{{ asset('storage/user_profiles/'.$user->profile_image) }}" width="100" height="100">
       @endif
       </div>
-      <div class="col text-right"><a>フォロー数：○○　|　フォロワー数：○○</a></div>
+      <div class="row">
+        <div class="col-6">
+          <p>フォロー数：{{$following_count}}　|　フォロワー数：{{$follower_count}}</p>
+        </div>
+        <div class="col-3 offset-3">
+        @unless ($user->id == Auth::user()->id)
+          @if ($user->isFollowedBy(Auth::user()))
+            <form method="POST" action="{{ route('user.unfollow', $user->id ) }}">
+            @csrf
+              <span class="unfollow">
+                <input id="user_id" name="user_id" type="hidden" value="{{$user->id}}">
+                <button type="submit" class="bg-light" style="border: none;">
+                  <h5 class="text-danger">
+                    フォローを外す
+                  </h5>
+                </button>
+              </span>
+            </form>
+          @else
+            <form method="POST" action="{{ route('user.follow') }}">
+            @csrf
+              <span class="follow">
+                <input id="user_id" name="user_id" type="hidden" value="{{$user->id}}">
+                <button type="submit" class="bg-light" style="border: none;">
+                  <h5 class="text-primary">
+                    フォローする
+                  </h5>
+                </button>
+              </span>
+            </form>
+          @endif
+        @endif
+        </div>
+      </div>
+
       <table class="table table-light border">
         <tr>
           <td>ユーザーネーム</td>

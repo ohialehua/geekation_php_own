@@ -38,6 +38,12 @@ class User extends Authenticatable
     public function markers() {
         return $this->hasMany(Marker::class);
     }
+    public function followeds() {
+        return $this->hasMany(Relationship::class);
+    }
+    public function followers() {
+        return $this->hasMany(Relationship::class);
+    }
 
     protected $fillable = [
         'name',
@@ -49,6 +55,10 @@ class User extends Authenticatable
         'phone_number',
         'password',
     ];
+
+    public function isFollowedBy($user): bool {
+        return Relationship::where('followed_id', $user->id)->where('follower_id', $this->id)->first() !==null;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

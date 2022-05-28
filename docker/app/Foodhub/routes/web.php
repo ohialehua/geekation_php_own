@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/favorite/{id}/delete',           'App\Http\Controllers\Auth\FavoriteController@destroy')->name('user.favorite.destroy');
     Route::post('user/marker/create',               'App\Http\Controllers\Auth\MarkerController@create')->name('user.marker.create');
     Route::post('user/marker/{id}/delete',           'App\Http\Controllers\Auth\MarkerController@destroy')->name('user.marker.destroy');
+    Route::post('user/follow',                       'App\Http\Controllers\Auth\RelationshipController@follow')->name('user.follow');
+    Route::post('user/unfollow/{id}',                'App\Http\Controllers\Auth\RelationshipController@unfollow')->name('user.unfollow');
 });
 
 /*

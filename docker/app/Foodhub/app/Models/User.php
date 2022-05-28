@@ -38,10 +38,7 @@ class User extends Authenticatable
     public function markers() {
         return $this->hasMany(Marker::class);
     }
-    public function followeds() {
-        return $this->hasMany(Relationship::class);
-    }
-    public function followers() {
+    public function relationships() {
         return $this->hasMany(Relationship::class);
     }
 

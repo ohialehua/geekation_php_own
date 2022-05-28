@@ -12,11 +12,11 @@
         <img src="{{ asset('storage/user_profiles/'.$user->profile_image) }}" width="100" height="100">
       @endif
       </div>
-      <div class="row">
-        <div class="col-6">
-          <p>フォロー数：{{$following_count}}　|　フォロワー数：{{$follower_count}}</p>
+      <div class="row mt-3">
+        <div class="col-6 my-auto">
+          <h6>フォロー数：{{$following_count}}　|　フォロワー数：{{$follower_count}}</h6>
         </div>
-        <div class="col-3 offset-3">
+        <div class="col-4 offset-2 text-end">
         @unless ($user->id == Auth::user()->id)
           @if ($user->isFollowedBy(Auth::user()))
             <form method="POST" action="{{ route('user.unfollow', $user->id ) }}">

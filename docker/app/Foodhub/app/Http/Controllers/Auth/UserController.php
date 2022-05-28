@@ -27,8 +27,16 @@ class UserController extends Controller
      */
 
     public function index() {
+        $user = \Auth::user();
         $users = User::all();
-        return view('user.index', ['users'=>$users]);
+        $following_users = Relationship::where('followed_id', $user->id)->get();
+        $follower_users = Relationship::where('follower_id', $user->id)->get();
+        return view('user.index',
+                   [
+                    'users'=>$users,
+                    'following_users'=>$following_users,
+                    'follower_users'=>$follower_users,
+                   ]);
     }
 
     public function show($id) {

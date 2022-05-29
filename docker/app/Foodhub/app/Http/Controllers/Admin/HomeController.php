@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Store;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $stores = Store::all()->sortByDesc('created_at');
+        return view('admin.home', ['stores'=>$stores]);
     }
 }

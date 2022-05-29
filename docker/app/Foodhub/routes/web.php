@@ -87,6 +87,8 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout',   'App\Http\Controllers\Admin\LoginController@logout')->name('admin.logout');
     Route::get('home',      'App\Http\Controllers\Admin\HomeController@index')->name('admin.home');
+    Route::get('store/{id}',      'App\Http\Controllers\Admin\StoreController@show')->name('admin.store.show');
+    Route::post('store/{id}/edit',      'App\Http\Controllers\Admin\StoreController@update')->name('admin.store.update');
 });
 /*
 |--------------------------------------------------------------------------

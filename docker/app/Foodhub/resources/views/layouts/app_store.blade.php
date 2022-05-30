@@ -93,11 +93,11 @@
 
         <main class="mb-auto py-4">
           @if (session('msg_success'))
-            <div class="col-8 mx-auto mb-2 text-center px-4 py-3 border rounded bg-success" role="alert">
+            <div class="col-8 mx-auto mb-2 text-center px-4 py-3 border rounded bg-success text-white" role="alert">
               <p class="my-auto text-white">{{ session('msg_success') }}</p>
             </div>
           @elseif (session('msg_danger'))
-            <div class="col-8 mx-auto mb-2 text-center px-4 py-3 border rounded bg-danger" role="alert">
+            <div class="col-8 mx-auto mb-2 text-center px-4 py-3 border rounded bg-danger text-white" role="alert">
               <p class="my-auto">{{ session('msg_danger') }}</p>
             </div>
           @elseif (session('msg_info'))

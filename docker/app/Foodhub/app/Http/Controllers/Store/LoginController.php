@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Store;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Store;
 
@@ -56,5 +57,24 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         return redirect('/store/login');  //変更
+    }
+
+    // アカウントが無効だとログインできない
+    protected function credentials(Request $request)
+    {
+        $temporary = $request->only($this->username(), 'password');
+        $temporary['is_deleted'] = 1;
+
+        try {
+            $store = Store::where('email', $request->email)->first();
+            if ($store->is_deleted == 0) {
+                back()->with('msg_danger', 'アカウントが無い、もしくは無効のためログインできません');
+            } else {
+                back()->with('msg_success', 'ログインしました');
+            }
+        } catch (\Exception $e) {
+                back()->with('msg_danger', 'このメールアドレスのアカウントは存在しません。');
+        }
+        return $temporary;
     }
 }

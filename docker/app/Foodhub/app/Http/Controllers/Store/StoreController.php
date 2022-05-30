@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Store;
 
 class StoreController extends Controller
@@ -52,5 +53,28 @@ class StoreController extends Controller
     }
         //リダイレクト
         return redirect('store/home')->with('msg_secondary', '加盟店情報を編集しました');
+    }
+
+    public function unsubscribe() {
+        return view('store.unsubscribe', ['store' => \Auth::user() ]);
+    }
+
+    public function withdraw(Request $request) {
+        $store = \Auth::user();
+    try {
+        $params = $request->all();
+
+        //不要な「_token」の削除
+        unset($params['_token']);
+        //保存
+        $store->fill($params)->save();
+
+        Auth::guard('store')->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+    } catch (\Exception $e) {
+        return back()->with('msg_danger', '退会に失敗しました');
+    }
+        return redirect('store/register')->with('msg_danger', 'Foodhubを退会しました');
     }
 }

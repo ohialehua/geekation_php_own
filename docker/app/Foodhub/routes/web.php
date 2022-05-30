@@ -128,4 +128,6 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::post('post_comment/create',         'App\Http\Controllers\Store\PostCommentController@create')->name('store.post_comment.create');
     Route::post('post_comment/{id}/delete',     'App\Http\Controllers\Store\PostCommentController@destroy')->name('store.post_comment.destroy');
     Route::get('marker/index',                   'App\Http\Controllers\Store\MarkerController@index')->name('store.marker.index');
+    Route::get('unsubscribe',                   'App\Http\Controllers\Store\StoreController@unsubscribe')->name('store.unsubscribe');
+    Route::post('{id}/withdraw',                   'App\Http\Controllers\Store\StoreController@withdraw')->name('store.withdraw');
 });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // protected function credentials(Request $request)
+    // {
+    //     $temporary = $request->only($this->username(), 'password');
+    //     try {
+    //         $user = User::where('email', $request->email)->first();
+    //         if ($user->email == $request->email) {
+    //             back()->with('msg_success', 'ログインしました');
+    //         }
+    //     } catch (\Exception $e) {
+    //             back()->with('msg_danger', 'このメールアドレスのアカウントは存在しません。');
+    //     }
+    //     return $temporary;
+    // }
 }

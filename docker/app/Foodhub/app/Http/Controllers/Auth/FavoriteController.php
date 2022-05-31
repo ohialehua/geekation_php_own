@@ -34,7 +34,18 @@ class FavoriteController extends Controller
                 $favorite->save();
             // 不要な「_token」の削除
             unset($favorite['_token']);
-            //保存
+            if ( isset($favorite->user_post_id) ) {
+                $notification = new PublicNotification();
+                $notification->sender_id = $user->id;
+                $notification->receiver_id = $favorite->user_post->user_id;
+                $notification->action = 'like';
+             } elseif ( isset($favorite->store_post_id) ) {
+                $notification = new StoreNotification();
+                $notification->user_id = $user->id;
+                $notification->store_id = $favorite->store_post->store_id;
+                $notification->action = 'like';
+             }
+             $notification->save();
         } catch (\Exception $e) {
             return back()->with('msg_danger', 'いいねに失敗しました');
         }

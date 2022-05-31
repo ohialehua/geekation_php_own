@@ -36,7 +36,11 @@ class MarkerController extends Controller
                 $marker->save();
             // 不要な「_token」の削除
             unset($marker['_token']);
-            //保存
+                $notification = new StoreNotification();
+                $notification->user_id = $user->id;
+                $notification->store_id = $store->id;
+                $notification->action = 'mark';
+                $notification->save();
         } catch (\Exception $e) {
             return back()->with('msg_danger', 'お気に入りに失敗しました');
         }

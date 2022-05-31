@@ -9,6 +9,7 @@ use App\Models\StoreOrder;
 use App\Models\OrderItem;
 use App\Models\Store;
 use App\Models\Item;
+use App\Models\PublicNotification;
 
 class StoreOrderController extends Controller
 {
@@ -67,6 +68,14 @@ class StoreOrderController extends Controller
             return back()->with('msg_warning', '入金を確認しました');
         // 注文ステータスが「発送完了」なら
         } elseif ($store_order->order_status == 4) {
+            //通知を作成
+            $notification = new PublicNotification();
+            $notification->user_id = $store_order->user_id;
+            $notification->store_id = $store_order->store_id;
+            $notification->store_order_id = $store_order->id;
+            $notification->action = 'order';
+
+            $notification->save();
             return back()->with('msg_success', '発送が完了しました');
         }
     } catch (\Exception $e) {

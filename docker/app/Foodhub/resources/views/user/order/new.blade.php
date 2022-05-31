@@ -34,14 +34,16 @@
                 </div>
               </div>
 
-              <label for="pay_method" class="col-md-4 col-form-label text-md-end"><strong>{{ __('お届け先') }}</strong></label>
-              <div class="row mb-3">
+              <label for="pay_method" class="col-md-4 col-form-label text-center"><strong>{{ __('お届け先') }}</strong></label>
+              <div class="row mb-3 justify-content-center">
                 <div class="form-check form-check-inline">
-                  <input id="delivery_method" type="radio" value="0" checked name="delivery_method" required autocomplete="delivery_method">
-                  <label for="delivery" class="col-md-4 col-form-label text-md-end">{{ __('登録済み住所から選択') }}</label>
+                  <label for="delivery" class="col-md-6 offset-2 col-form-label">
+                    <input id="delivery_method" type="radio" value="0" checked name="delivery_method" required autocomplete="delivery_method">
+                    {{ __('登録済み住所から選択') }}
+                  </label>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <select class="form-select" id="delivery_id" type="text" name="delivery_id">
                     @foreach ($deliveries as $delivery)
                       <option value="{{$delivery->id}}">
@@ -54,8 +56,10 @@
 
               <div class="row mb-3">
                 <div class="form-check form-check-inline">
-                  <input id="delivery_method" type="radio" value="1" name="delivery_method" required autocomplete="delivery_method">
-                  <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('新しいお届け先') }}</label>
+                  <label for="address" class="col-md-6 offset-2 col-form-label">
+                    <input id="delivery_method" type="radio" value="1" name="delivery_method" required autocomplete="delivery_method">
+                    {{ __('新しいお届け先') }}
+                  </label>
                 </div>
 
               <form method="POST" action="{{ route('user.delivery.create') }}">

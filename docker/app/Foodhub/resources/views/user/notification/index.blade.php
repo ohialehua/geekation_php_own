@@ -38,7 +38,32 @@
               </td>
             @endif
               <td>{{date('Y年m月d日', strtotime($notification->created_at))}}</td>
-              <td>{{$notification->action}}</td>
+              <td>
+                @if ( $notification->action == 'like')
+                  <a href="/user/{{$notification->sender->id}}" class="text-dark">
+                    {{$notification->sender->name}}さん
+                  </a>
+                  にいいねされました
+                @elseif ( $notification->action == 'comment')
+                  <a href="/user/{{$notification->sender->id}}" class="text-dark">
+                    {{$notification->sender->name}}さん
+                  </a>
+                  が
+                  <a href="/user/post/{{$notification->post_comment->user_post_id}}" class="text-dark">
+                  あなたの投稿
+                  </a>
+                  にコメントしました
+                @elseif ( $notification->action == 'order')
+                  <a href="/user/store/{{$notification->store_id}}" class="text-dark">
+                    {{$notification->store->name}}さん
+                  </a>
+                  で
+                  <a href="/user/order/{{$notification->store_order->order_id}}" class="text-dark">
+                  注文した商品
+                  </a>
+                  が発送されました
+                @endif
+              </td>
             </tr>
           @endforeach
           </table>

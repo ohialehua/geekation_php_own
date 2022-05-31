@@ -23,6 +23,16 @@
   right: 8.5%;
   top: 10%;
 }
+.unchecked_store {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background:rgba(255,69,0,0.8) ;
+  position: absolute;
+  right: 7%;
+  top: 10%;
+}
+
 @media (max-width: 1020px) and (min-width: 768px) {
   .navbar-toggler {
     position: absolute;
@@ -47,7 +57,17 @@
     right: 6%;
     top: 10%;
   }
+  .unchecked_store {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background:rgba(255,69,0,0.8) ;
+    position: absolute;
+    right: 3%;
+    top: 10%;
+  }
 }
+
 @media (max-width: 767px) {
   .navbar-toggler {
     position: absolute;
@@ -70,6 +90,15 @@
     background:rgba(255,69,0,0.8) ;
     position: absolute;
     right: 6%;
+    top: 10%;
+  }
+  .unchecked_store {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background:rgba(255,69,0,0.8) ;
+    position: absolute;
+    right: 1%;
     top: 10%;
   }
 }

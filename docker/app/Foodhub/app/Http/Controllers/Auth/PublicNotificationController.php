@@ -51,9 +51,9 @@ class PublicNotificationController extends Controller
     }
         //リダイレクト
         if ($notification->checked == 1) {
-            return redirect('user/notification/index')->with('msg_success', '通知を確認しました');
+            return back()->with('msg_success', '通知を確認しました');
         } else {
-            return redirect('user/notification/index')->with('msg_secondary', '通知を未読にしました');
+            return back()->with('msg_secondary', '通知を未読にしました');
         }
     }
 

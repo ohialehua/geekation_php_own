@@ -119,7 +119,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('アカウント情報を精査するため、登録後直ぐのログインはできません。ご了承ください。')">
                                     {{ __('Register') }}
                                 </button>
                             </div>

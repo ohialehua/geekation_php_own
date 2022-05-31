@@ -67,6 +67,8 @@ Route::group(['middleware' => 'auth:user'], function() {
     Route::post('user/marker/{id}/delete',           'App\Http\Controllers\Auth\MarkerController@destroy')->name('user.marker.destroy');
     Route::post('user/follow',                       'App\Http\Controllers\Auth\RelationshipController@follow')->name('user.follow');
     Route::post('user/unfollow/{id}',                'App\Http\Controllers\Auth\RelationshipController@unfollow')->name('user.unfollow');
+    Route::get('user/notification/index',                  'App\Http\Controllers\Auth\PublicNotificationController@index')->name('user.notification.index');
+    Route::post('user/notification/update/{id}',                  'App\Http\Controllers\Auth\PublicNotificationController@update')->name('user.notification.update');
 });
 
 /*
@@ -89,6 +91,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('home',      'App\Http\Controllers\Admin\HomeController@index')->name('admin.home');
     Route::get('store/{id}',      'App\Http\Controllers\Admin\StoreController@show')->name('admin.store.show');
     Route::post('store/{id}/edit',      'App\Http\Controllers\Admin\StoreController@update')->name('admin.store.update');
+    Route::get('notification/index',                  'App\Http\Controllers\Admin\AdminNotificationController@index')->name('admin.notification.index');
+    Route::post('notification/update/{id}',                  'App\Http\Controllers\Admin\AdminNotificationController@update')->name('admin.notification.update');
 });
 /*
 |--------------------------------------------------------------------------
@@ -130,4 +134,6 @@ Route::group(['prefix' => 'store', 'middleware' => 'auth:store'], function() {
     Route::get('marker/index',                   'App\Http\Controllers\Store\MarkerController@index')->name('store.marker.index');
     Route::get('unsubscribe',                   'App\Http\Controllers\Store\StoreController@unsubscribe')->name('store.unsubscribe');
     Route::post('{id}/withdraw',                   'App\Http\Controllers\Store\StoreController@withdraw')->name('store.withdraw');
+    Route::get('notification/index',                  'App\Http\Controllers\Store\StoreNotificationController@index')->name('store.notification.index');
+    Route::post('notification/update/{id}',                  'App\Http\Controllers\Store\StoreNotificationController@update')->name('store.notification.update');
 });

@@ -54,6 +54,8 @@
                   注文
                   </a>
                   を受け付けました。
+                @elseif ( $notification->action == 'mark')
+                    {{$notification->user->name}}さんがあなたをお気に入り追加しました
                 @endif
               </td>
             </tr>

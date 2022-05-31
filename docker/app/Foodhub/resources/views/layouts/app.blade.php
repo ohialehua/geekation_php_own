@@ -120,9 +120,11 @@
             </a>
           </div>
           @else
+          <div class="cart col-2 offset-3 mx-2">
             <a href="/user/item/index" onclick="return confirm('カートが空です')">
               <i class="fa fa-cart-arrow-down fa-3x" style="color: #747a80;"></i>
             </a>
+          </div>
           @endif
 
           @unless ($bell_count == 0)

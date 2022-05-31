@@ -62,6 +62,11 @@
                   注文した商品
                   </a>
                   が発送されました
+                @elseif ( $notification->action == 'follow')
+                  <a href="/user/{{$notification->sender->id}}" class="text-dark">
+                    {{$notification->sender->name}}さん
+                  </a>
+                  があなたをフォローしました
                 @endif
               </td>
             </tr>

@@ -55,7 +55,7 @@
                   にコメントしました
                 @elseif ( $notification->action == 'order')
                   <a href="/user/store/{{$notification->store_id}}" class="text-dark">
-                    {{$notification->store->name}}さん
+                    {{$notification->store->name}}
                   </a>
                   で
                   <a href="/user/order/{{$notification->store_order->order_id}}" class="text-dark">

@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+.navbar-toggler {
+  position: absolute;
+  right: 3%;
+  top: 20%;
+}
+.unchecked_cart {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background:rgba(255,69,0,0.8) ;
+  position: absolute;
+  right: 12%;
+  top: 10%;
+}
+.unchecked_bell {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background:rgba(255,69,0,0.8) ;
+  position: absolute;
+  right: 8.5%;
+  top: 10%;
+}
+@media (max-width: 1020px) and (min-width: 768px) {
+  .navbar-toggler {
+    position: absolute;
+    right: 30%;
+    top: 20%;
+  }
+  .unchecked_cart {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background:rgba(255,69,0,0.8) ;
+    position: absolute;
+    right: 13%;
+    top: 10%;
+  }
+  .unchecked_bell {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background:rgba(255,69,0,0.8) ;
+    position: absolute;
+    right: 6%;
+    top: 10%;
+  }
+}
+@media (max-width: 767px) {
+  .navbar-toggler {
+    position: absolute;
+    right: 25%;
+    top: 20%;
+  }
+  .unchecked_cart {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background:rgba(255,69,0,0.8) ;
+    position: absolute;
+    right: 17%;
+    top: 10%;
+  }
+  .unchecked_bell {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background:rgba(255,69,0,0.8) ;
+    position: absolute;
+    right: 6%;
+    top: 10%;
+  }
+}

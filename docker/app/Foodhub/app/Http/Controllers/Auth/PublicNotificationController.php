@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\StoreOrder;
-use App\Models\User;
-use App\Models\Store;
-use App\Models\PostComment;
-use App\Models\UserPost;
-use App\Models\StorePost;
+use App\Models\PublicNotification;
+// use App\Models\StoreOrder;
+// use App\Models\User;
+// use App\Models\Store;
+// use App\Models\PostComment;
+// use App\Models\UserPost;
+// use App\Models\StorePost;
 
 class PublicNotificationController extends Controller
 {
@@ -42,17 +43,14 @@ class PublicNotificationController extends Controller
     public function update(Request $request) {
         $notification = PublicNotification::find($request->id);
     try {
-        $params = $request->all();
-
-        //不要な「_token」の削除
-        unset($params['_token']);
+        $notification->checked = $request->checked;
         //保存
-        $notification->fill($params)->save();
+        $notification->save();
     } catch (\Exception $e) {
         return back()->with('msg_danger', '通知の確認に失敗しました');
     }
         //リダイレクト
-        if ($notification->checked == false) {
+        if ($notification->checked == 1) {
             return redirect('user/notification/index')->with('msg_success', '通知を確認しました');
         } else {
             return redirect('user/notification/index')->with('msg_secondary', '通知を未読にしました');

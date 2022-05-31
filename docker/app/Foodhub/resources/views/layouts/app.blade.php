@@ -23,6 +23,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+  <?php
+    use App\Models\Item;
+  ?>
   <div id="app">
   </div>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -56,6 +59,31 @@
               </li>
             @endif
           @else
+            <div class="row">
+              <div class="col-6">
+                <?php
+                  $user = \Auth::user();
+                  $last_item = Item::whereHas('cart_items', function($q) use($user){
+                    $q->whereUserId($user->id);
+                  })->latest()->first();
+                ?>
+                @if ($last_item)
+                  <a href="/user/item/{{$last_item->id}}">
+                    <i class="fa fa-cart-arrow-down fa-2x" style="color: #747a80;"></i>
+                  </a>
+                @else
+                  <a href="/user/item/index" onclick="return confirm('カートが空です')">
+                    <i class="fa fa-cart-arrow-down fa-2x" style="color: #747a80;"></i>
+                  </a>
+                @endif
+              </div>
+              <div class="col-6">
+                <a href="/user/notification/index">
+                  <i class="far fa-bell fa-2x" style="color: #747a80;"></i>
+                </a>
+              </div>
+            </div>
+
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 {{ Auth::user()->name }}

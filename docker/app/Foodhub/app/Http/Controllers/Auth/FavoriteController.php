@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PublicNotification;
+use App\Models\StoreNotification;
 use App\Models\Favorite;
 use App\Models\UserPost;
 use App\Models\StorePost;
@@ -55,6 +57,10 @@ class FavoriteController extends Controller
 
     public function destroy(Request $request) {
         $user = \Auth::user();
-        $favorite = Favorite::where('user_id', $user->id)->where('user_post_id', $request->user_post_id)->delete();
+        if ($favorite = Favorite::where('user_id', $user->id)->where('user_post_id', $request->user_post_id)) {
+            $favorite->delete();
+        } elseif ($favorite = Favorite::where('user_id', $user->id)->where('store_post_id', $request->store_post_id)) {
+            $favorite->delete();
+        };
         return back()->with('msg_danger', 'いいねを削除しました');    }
 }

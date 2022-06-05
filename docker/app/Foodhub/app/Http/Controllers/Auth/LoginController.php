@@ -40,6 +40,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    protected function loggedOut(\Illuminate\Http\Request $request)
+    {
+        return redirect('/login');
+    }
+
     // protected function credentials(Request $request)
     // {
     //     $temporary = $request->only($this->username(), 'password');

@@ -21,16 +21,22 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
+  <?php
+    use App\Models\Item;
+    use App\Models\PublicNotification;
+  ?>
   <div id="app">
   </div>
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+  <header>
+    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-          {{ config('app.name', 'Laravel') }}
+          <img src="/storage/logo.jpg" width="300" height="70" >
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar-toggler mx-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -56,10 +62,11 @@
               </li>
             @endif
           @else
+
             <li class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }}
-              </a>
+                <a id="navbarDropdown" class="nav-link dropdown-toggle h3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ Auth::user()->name }}
+                </a>
 
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('home') }}">
@@ -91,8 +98,56 @@
           @endguest
           </ul>
         </div>
+      @auth
+        <div class="notifications row my-2 mx-1">
+          <?php
+            $user = \Auth::user();
+            $last_item = Item::whereHas('cart_items', function($q) use($user){
+              $q->whereUserId($user->id);
+            })->latest()->first();
+            $bell_count = PublicNotification::where([['user_id', $user->id], ['checked', 0]])
+              ->orWhere([['receiver_id', $user->id], ['checked', 0]])
+              ->count();
+          ?>
+          @if ($last_item)
+          <div class="cart col-2 offset-3 mx-2">
+            <label class="unchecked_cart text-white text-center">
+              {{$user->cart_items->count()}}
+            </label>
+            <a href="/user/item/{{$last_item->id}}">
+              <i class="fa fa-cart-arrow-down fa-3x" style="color: #747a80;">
+              </i>
+            </a>
+          </div>
+          @else
+          <div class="cart col-2 offset-3 mx-2">
+            <a href="/user/item/index" onclick="return confirm('カートが空です')">
+              <i class="fa fa-cart-arrow-down fa-3x" style="color: #747a80;"></i>
+            </a>
+          </div>
+          @endif
+
+          @unless ($bell_count == 0)
+          <div class="bell col-2 offset-3">
+            <label class="unchecked_bell text-white text-center">
+              {{$bell_count}}
+            </label>
+            <a href="/user/notification/index">
+              <i class="far fa-bell fa-3x" style="color: #747a80;"></i>
+            </a>
+          </div>
+          @else
+          <div class="bell col-2 offset-3">
+            <a href="/user/notification/index">
+              <i class="far fa-bell fa-3x" style="color: #747a80;"></i>
+            </a>
+          </div>
+          @endif
+        </div>
+      @endauth
       </div>
     </nav>
+  </header>
 
     <main class="mb-auto py-4">
       @if (session('msg_success'))

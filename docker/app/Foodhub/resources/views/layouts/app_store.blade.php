@@ -21,75 +21,107 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
+  <?php
+    use App\Models\StoreNotification;
+  ?>
     <div id="app">
     </div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+    <header>
+    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url('/') }}">
+          <img src="/storage/logo.jpg" width="300" height="70" >
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left Side Of Navbar -->
+          <ul class="navbar-nav me-auto">
+
+          </ul>
+
+          <!-- Right Side Of Navbar -->
+          <ul class="navbar-nav ms-auto">
+            <!-- Authentication Links -->
+            @guest
+              @if (Route::has('store.login'))
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('store.login') }}">{{ __('Login') }}</a>
+                </li>
+              @endif
+
+              @if (Route::has('store.register'))
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('store.register') }}">{{ __('Register') }}</a>
+                </li>
+              @endif
+            @else
+              <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle h3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  {{ Auth::user()->name }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('store.home') }}">
+                    {{ __('Mypage') }}
+                  </a>
 
-                    </ul>
+                  <a class="dropdown-item" href="{{ route('store.marker.index') }}">
+                    {{ __('Customers') }}
+                  </a>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('store.login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('store.login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                  <a class="dropdown-item" href="{{ route('store.store_order.index') }}">
+                    {{ __('Orders') }}
+                  </a>
 
-                            @if (Route::has('store.register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('store.register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                  <a class="dropdown-item" href="{{ route('store.logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                  </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('store.home') }}">
-                                        {{ __('Mypage') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('store.marker.index') }}">
-                                        {{ __('Customers') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('store.store_order.index') }}">
-                                        {{ __('Orders') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('store.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('store.logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                  <form id="logout-form" action="{{ route('store.logout') }}" method="POST" class="d-none">
+                    @csrf
+                  </form>
                 </div>
-            </div>
-        </nav>
+              </li>
+            @endguest
+          </ul>
+        </div>
+      @auth
+        <div class="notifications row my-2">
+          <?php
+            $store = \Auth::user();
+            $bell_count = StoreNotification::where([['store_id', $store->id], ['checked', 0]])
+              ->count();
+          ?>
+
+          @unless ($bell_count == 0)
+          <div class="bell">
+            <label class="unchecked_store text-white text-center">
+              {{$bell_count}}
+            </label>
+            <a href="/store/notification/index">
+              <i class="far fa-bell fa-3x" style="color: #747a80;"></i>
+            </a>
+          </div>
+          @else
+          <div class="bell col-2 offset-3">
+            <a href="/store/notification/index">
+              <i class="far fa-bell fa-3x" style="color: #747a80;"></i>
+            </a>
+          </div>
+          @endif
+        </div>
+      @endauth
+      </div>
+    </nav>
+    </header>
 
         <main class="mb-auto py-4">
           @if (session('msg_success'))

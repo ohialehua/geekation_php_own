@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Relationship;
 use App\Models\User;
+use App\Models\PublicNotification;
 
 class RelationshipController extends Controller
 {
@@ -35,7 +36,11 @@ class RelationshipController extends Controller
                 $relationship->save();
             // 不要な「_token」の削除
             unset($relationship['_token']);
-            //保存
+                $notification = new PublicNotification();
+                $notification->sender_id = $user->id;
+                $notification->receiver_id = $following->id;
+                $notification->action = 'follow';
+                $notification->save();
         } catch (\Exception $e) {
             return back()->with('msg_danger', 'フォローに失敗しました');
         }

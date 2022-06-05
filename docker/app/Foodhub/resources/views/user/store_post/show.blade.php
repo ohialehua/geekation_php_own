@@ -26,6 +26,7 @@
               <form method="POST" action="{{ route('user.favorite.destroy', $post->id ) }}">
               @csrf
                 <span class="favorites" title="いいねをはずす">
+                  <input id="store_post_id" name="store_post_id" type="hidden" value="{{$post->id}}">
                   <button type="submit" class="bg-white" style="border: none;"><h3 class="text-danger"><i class="fas fa-heart">{{$post->favorites->count()}}</i></h3></button>
                 </span>
               </form>

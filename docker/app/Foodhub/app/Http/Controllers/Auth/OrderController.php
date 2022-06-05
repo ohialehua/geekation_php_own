@@ -13,6 +13,7 @@ use App\Models\Item;
 use App\Models\CartItem;
 use App\Models\Delivery;
 use App\Models\Store;
+use App\Models\StoreNotification;
 
 class OrderController extends Controller
 {
@@ -102,11 +103,20 @@ class OrderController extends Controller
                             'store_id' => $store->id,
                         ]);
                         $store_order_id = $store_order->id;
+                        //通知を作成
+                          $notification = new StoreNotification();
+                          $notification->user_id = $user->id;
+                          $notification->store_id = $store->id;
+                          $notification->store_order_id = $store_order->id;
+                          $notification->action = 'order';
+
+                          $notification->save();
+
                       } else {
                     //  既にある加盟店ごとの注文書の一番目のIDを取得
                         $store_order_id = StoreOrder::whereStoreId($store->id)->whereOrderId($order->id)->first()->id;
                       }
-
+                //  注文詳細を作成
                     $order_item = OrderItem::create([
                         'order_id' => $order->id,
                         'store_order_id' => $store_order_id,

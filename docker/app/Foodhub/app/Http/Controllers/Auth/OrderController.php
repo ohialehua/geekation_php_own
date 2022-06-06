@@ -36,10 +36,10 @@ class OrderController extends Controller
         $user = \Auth::user();
         $deliveries = $user->deliveries;
         $cart_items = $user->cart_items;
-        if ($cart_items) {
-            return view('user.order.new', ['deliveries'=>$deliveries, 'cart_items'=>$cart_items]);
-        } else {
+        if ($cart_items->isEmpty()) {
             return back()->with('msg_warning', 'カートに商品を入れてください');
+        } else {
+            return view('user.order.new', ['deliveries'=>$deliveries, 'cart_items'=>$cart_items]);
         }
     }
 

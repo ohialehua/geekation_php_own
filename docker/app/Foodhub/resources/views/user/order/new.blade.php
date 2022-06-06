@@ -35,6 +35,8 @@
               </div>
 
               <label for="pay_method" class="col-md-4 col-form-label text-center"><strong>{{ __('お届け先') }}</strong></label>
+
+              @unless ($deliveries->isEmpty())
               <div class="row mb-3 justify-content-center">
                 <div class="form-check form-check-inline">
                   <label for="delivery" class="col-md-6 offset-2 col-form-label">
@@ -53,11 +55,12 @@
                   </select>
                 </div>
               </div>
+              @endif
 
               <div class="row mb-3">
                 <div class="form-check form-check-inline">
                   <label for="address" class="col-md-6 offset-2 col-form-label">
-                    <input id="delivery_method" type="radio" value="1" name="delivery_method" required autocomplete="delivery_method">
+                    <input id="delivery_method" type="radio" value="1" name="delivery_method" @if($deliveries->isEmpty()) checked @endif required autocomplete="delivery_method">
                     {{ __('新しいお届け先') }}
                   </label>
                 </div>

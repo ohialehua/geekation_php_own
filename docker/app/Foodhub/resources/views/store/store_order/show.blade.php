@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-8">
+    <div class="col-lg-10">
       <div class="card mb-5">
         <div class="card-header">{{ __('注文情報詳細') }}</div>
           <div class="card-body">

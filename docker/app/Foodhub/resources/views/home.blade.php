@@ -34,7 +34,7 @@
           <a href="user/edit/{{$user->id}}" class="btn btn-sm btn-secondary mb-2">編集</a>
         </ul>
       </div>
-      <div class="col text-right"><a>フォロー数：○○　|　フォロワー数：○○</a></div>
+      <div class="col text-right"><h6>フォロー数：{{$following_count}}　|　フォロワー数：{{$follower_count}}</h6></div>
       <table class="table table-light border">
         <tr>
           <td>ユーザーネーム</td>

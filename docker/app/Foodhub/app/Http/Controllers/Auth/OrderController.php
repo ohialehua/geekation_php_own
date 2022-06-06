@@ -124,6 +124,15 @@ class OrderController extends Controller
                         'quantity' => $cart_item->quantity,
                         'price_after_tax' => $cart_item->item->price_before_tax * $tax,
                       ]);
+                // 支払方法がカードなら
+                    if ($order->pay_method == 0) {
+                        $store_order->order_status = 1;
+                        $order_item->product_status = 1;
+                    //保存
+                        $store_order->save();
+                        $order_item->save();
+                // 注文ステータスを"入金確認"、製作ステータスを"製作待ち"に変更
+                    }
                 //  商品の累計数加算
                     $item = Item::find($cart_item->item_id);
                     $item->sales_figures += $order_item->quantity;

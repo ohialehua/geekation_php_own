@@ -48,6 +48,7 @@ class OrderController extends Controller
         $cart_items = $user->cart_items;
         $tax = 1.1;
         $pay_method = $request->pay_method;
+        // 既存の配送先か新しい配送先かで場合分け
         if ($request->delivery_method == 0) {
             $delivery = Delivery::find($request->delivery_id);
         } elseif ($request->delivery_method == 1) {

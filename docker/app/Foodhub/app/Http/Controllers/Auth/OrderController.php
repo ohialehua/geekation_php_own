@@ -71,6 +71,7 @@ class OrderController extends Controller
         $store_amount = Store::whereHas('items.cart_items', function($q) use($user) {
                           $q->whereUserId($user->id);
                         })->count();
+        // 注文商品の加盟店の数×200
         $postage = $store_amount * 200;
         return view('user.order.confirm', [
             'cart_items'=>$cart_items,

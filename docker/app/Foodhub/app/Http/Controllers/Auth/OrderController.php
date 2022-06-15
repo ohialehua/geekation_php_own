@@ -46,6 +46,7 @@ class OrderController extends Controller
     public function confirm(Request $request){
         $user = \Auth::user();
         $cart_items = $user->cart_items;
+        // 税金
         $tax = 1.1;
         $pay_method = $request->pay_method;
         // 既存の配送先か新しい配送先かで場合分け

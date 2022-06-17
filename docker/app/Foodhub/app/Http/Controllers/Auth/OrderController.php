@@ -80,7 +80,7 @@ class OrderController extends Controller
             'postage'=>$postage,
             'pay_method'=>$pay_method,
             'delivery'=>$delivery,
-         'store_amount'=>$store_amount
+            'store_amount'=>$store_amount
         ]);
     }
 

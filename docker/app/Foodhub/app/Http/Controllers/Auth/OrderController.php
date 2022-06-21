@@ -85,6 +85,7 @@ class OrderController extends Controller
     }
 
     public function create(Request $request){
+        // 税金
         $tax = 1.1;
         $user = \Auth::user();
         $cart_items = $user->cart_items;

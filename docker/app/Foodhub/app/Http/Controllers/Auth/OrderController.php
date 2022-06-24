@@ -89,7 +89,7 @@ class OrderController extends Controller
         $tax = 1.1;
         $user = \Auth::user();
         $cart_items = $user->cart_items;
-
+        //トランザクション
         DB::beginTransaction();
 
         try {

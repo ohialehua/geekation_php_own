@@ -165,6 +165,7 @@ class OrderController extends Controller
             DB::rollback();
             return back()->with('msg_danger', '注文の確定に失敗しました。入力情報などに誤りはありませんか？');
         }
+        // トランザクション終了
         DB::commit();
         return redirect('user/order/complete')->with('msg_success', '注文を完了しました');
     }

@@ -172,6 +172,7 @@ class OrderController extends Controller
 
     public function complete(){
         $user = \Auth::user();
+        // ユーザーIDがログインユーザーで最新の注文の情報を1つ取得
         $order = Order::whereUserId($user->id)->latest()->first();
         $order_items = $order->order_items;
         return view('user.order.complete', ['order'=>$order, 'order_items'=>$order_items]);
